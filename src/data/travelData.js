@@ -1,13 +1,11 @@
 /* ——— Rich Mock Travel Data ——— */
 
-import baliImg from '../assets/images/bali.png'
-import parisImg from '../assets/images/paris.png'
-import dubaiImg from '../assets/images/dubai.png'
-import tokyoImg from '../assets/images/tokyo.png'
-import adventureImg from '../assets/images/adventure.png'
-import heroImg from '../assets/images/hero.png'
-
-export { heroImg }
+const baliImg = 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=85&auto=format'
+const parisImg = 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=85&auto=format'
+const dubaiImg = 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=85&auto=format'
+const tokyoImg = 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=85&auto=format'
+const adventureImg = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=85&auto=format'
+export const heroImg = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=85&auto=format'
 
 export const CITIES = {
   bali: {

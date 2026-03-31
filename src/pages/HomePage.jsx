@@ -51,7 +51,7 @@ export default function HomePage() {
 
       {/* ---- HERO ---- */}
       <section className="hp-hero">
-        <div className="hp-hero-bg" style={{ backgroundImage: `url(${heroImg})` }} />
+        <div className="hp-hero-bg" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=85&auto=format')` }} />
         <div className="hp-hero-overlay" />
         <div className="hp-hero-content">
           <span className="hp-hero-label">TRAVEL BOOKING PLATFORM</span>
