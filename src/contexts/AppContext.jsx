@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { supabase } from '../lib/supabase'
 
 const AppContext = createContext()
 export function useApp() { return useContext(AppContext) }
@@ -108,20 +109,60 @@ export function AppProvider({ children }) {
 
   const currencySymbol = CURRENCIES[currency]?.symbol || '$'
 
-  /* ─────── Auth Actions ─────── */
-  const login = (email, name) => {
-    setUser({ email, name, avatar: name.charAt(0).toUpperCase(), joinDate: new Date().toISOString() })
+  /* ─────── Auth Actions (Supabase) ─────── */
+  const [authError, setAuthError] = useState('')
+  const [authLoading, setAuthLoading] = useState(false)
+
+  const login = async (email, password) => {
+    setAuthError('')
+    setAuthLoading(true)
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+    setAuthLoading(false)
+    if (error) { setAuthError(error.message); return false }
+    const name = data.user.user_metadata?.name || email.split('@')[0]
+    setUser({ email, name, avatar: name.charAt(0).toUpperCase(), joinDate: data.user.created_at, id: data.user.id })
     setShowAuth(false)
     addNotification('welcome', 'Welcome Back!', `Welcome back, ${name}!`, '\ud83c\udf89')
     addPoints(50, 'Login bonus')
+    return true
   }
-  const signup = (email, name) => {
-    setUser({ email, name, avatar: name.charAt(0).toUpperCase(), joinDate: new Date().toISOString() })
+
+  const signup = async (email, name, password) => {
+    setAuthError('')
+    setAuthLoading(true)
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { name } }
+    })
+    setAuthLoading(false)
+    if (error) { setAuthError(error.message); return false }
+    setUser({ email, name, avatar: name.charAt(0).toUpperCase(), joinDate: new Date().toISOString(), id: data.user?.id })
     setShowAuth(false)
     addNotification('welcome', 'Welcome!', `Welcome to Wanderlust, ${name}!`, '\ud83c\udf89')
     addPoints(100, 'Signup bonus')
+    return true
   }
-  const logout = () => { setUser(null); localStorage.removeItem('wl-user') }
+
+  const logout = async () => {
+    await supabase.auth.signOut()
+    setUser(null)
+    localStorage.removeItem('wl-user')
+  }
+
+  /* ── Restore session on mount ── */
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        const name = session.user.user_metadata?.name || session.user.email.split('@')[0]
+        setUser({ email: session.user.email, name, avatar: name.charAt(0).toUpperCase(), joinDate: session.user.created_at, id: session.user.id })
+      }
+    })
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) { setUser(null) }
+    })
+    return () => subscription.unsubscribe()
+  }, [])
 
   /* ─────── Wishlist Actions ─────── */
   const toggleWishlist = (item) => {
@@ -215,7 +256,7 @@ export function AppProvider({ children }) {
 
   const value = {
     theme, toggleTheme,
-    user, showAuth, setShowAuth, authTab, setAuthTab, login, signup, logout,
+    user, showAuth, setShowAuth, authTab, setAuthTab, login, signup, logout, authError, setAuthError, authLoading,
     currency, setCurrency, convertPrice, formatPrice, currencySymbol, CURRENCIES,
     wishlist, toggleWishlist, isWishlisted, collections, setCollections, addToCollection, createCollection,
     notifications, showNotifications, setShowNotifications, addNotification, markNotificationRead, markAllRead, clearNotifications, unreadCount,
