@@ -426,7 +426,7 @@ export default function ItineraryPlannerPage() {
                 <p>Download your itinerary and access it offline anywhere</p>
               </div>
               <div className="planner-feature">
-                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #10b981, #14b8a6)' }}>Pack</div>
+                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #e04e2a, #f06840)' }}>Pack</div>
                 <h4>Packing Assistant</h4>
                 <p>Never forget essentials with smart packing checklists</p>
               </div>

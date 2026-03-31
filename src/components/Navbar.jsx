@@ -369,7 +369,7 @@ export default function Navbar() {
         }
 
         .nav-link--active {
-          color: #0f766e;
+          color: #e04e2a;
         }
 
         /* ========== FEATURES DROPDOWN ========== */
@@ -426,7 +426,7 @@ export default function Navbar() {
 
         .nav-features-item:hover {
           background: #f3f4f6;
-          color: #0f766e;
+          color: #e04e2a;
         }
 
         /* ========== RIGHT SIDE ========== */
@@ -529,12 +529,12 @@ export default function Navbar() {
 
         .nav-currency-opt:hover {
           background: #f3f4f6;
-          color: #0f766e;
+          color: #e04e2a;
         }
 
         .nav-currency-opt--active {
           background: #f0fdfa;
-          color: #0f766e;
+          color: #e04e2a;
           font-weight: 600;
         }
 
@@ -592,14 +592,14 @@ export default function Navbar() {
           font-weight: 500;
           border-radius: 8px;
           border: none;
-          background: #0f766e;
+          background: #e04e2a;
           color: #ffffff;
           cursor: pointer;
           transition: background 0.2s ease;
         }
 
         .nav-signin-btn:hover {
-          background: #0d6560;
+          background: #c4401f;
         }
 
         /* ========== MOBILE MENU BUTTON ========== */
@@ -663,12 +663,12 @@ export default function Navbar() {
         }
 
         .nav-drawer-link:hover {
-          color: #0f766e;
+          color: #e04e2a;
           background: #f9fafb;
         }
 
         .nav-drawer-link--active {
-          color: #0f766e;
+          color: #e04e2a;
         }
 
         .nav-drawer-divider {
@@ -709,7 +709,7 @@ export default function Navbar() {
 
         .nav-drawer-feature-item:hover {
           background: #f9fafb;
-          color: #0f766e;
+          color: #e04e2a;
         }
 
         .nav-drawer-row {
@@ -824,7 +824,7 @@ export default function Navbar() {
           width: 100%;
           padding: 12px;
           border: none;
-          background: #0f766e;
+          background: #e04e2a;
           color: #ffffff;
           border-radius: 8px;
           font-family: 'Inter', sans-serif;
@@ -836,7 +836,7 @@ export default function Navbar() {
         }
 
         .nav-drawer-signin:hover {
-          background: #0d6560;
+          background: #c4401f;
         }
 
         /* ========== RESPONSIVE ========== */
@@ -871,7 +871,7 @@ export default function Navbar() {
         }
 
         [data-theme="dark"] .nav-link--active {
-          color: #14b8a6;
+          color: #f06840;
         }
 
         [data-theme="dark"] .nav-icon-btn {
@@ -903,7 +903,7 @@ export default function Navbar() {
 
         [data-theme="dark"] .nav-features-item:hover {
           background: rgba(255, 255, 255, 0.04);
-          color: #14b8a6;
+          color: #f06840;
         }
 
         [data-theme="dark"] .nav-features-dropdown::-webkit-scrollbar-thumb {
@@ -922,12 +922,12 @@ export default function Navbar() {
 
         [data-theme="dark"] .nav-currency-opt:hover {
           background: rgba(255, 255, 255, 0.04);
-          color: #14b8a6;
+          color: #f06840;
         }
 
         [data-theme="dark"] .nav-currency-opt--active {
           background: rgba(20, 184, 166, 0.08);
-          color: #14b8a6;
+          color: #f06840;
         }
 
         [data-theme="dark"] .nav-currency-name {
@@ -944,12 +944,12 @@ export default function Navbar() {
         }
 
         [data-theme="dark"] .nav-signin-btn {
-          background: #0f766e;
+          background: #e04e2a;
           color: #ffffff;
         }
 
         [data-theme="dark"] .nav-signin-btn:hover {
-          background: #14b8a6;
+          background: #f06840;
         }
 
         [data-theme="dark"] .nav-hamburger-bar {
@@ -972,12 +972,12 @@ export default function Navbar() {
         }
 
         [data-theme="dark"] .nav-drawer-link:hover {
-          color: #14b8a6;
+          color: #f06840;
           background: rgba(255, 255, 255, 0.03);
         }
 
         [data-theme="dark"] .nav-drawer-link--active {
-          color: #14b8a6;
+          color: #f06840;
         }
 
         [data-theme="dark"] .nav-drawer-divider {
@@ -994,7 +994,7 @@ export default function Navbar() {
 
         [data-theme="dark"] .nav-drawer-feature-item:hover {
           background: rgba(255, 255, 255, 0.03);
-          color: #14b8a6;
+          color: #f06840;
         }
 
         [data-theme="dark"] .nav-drawer-label {
@@ -1046,11 +1046,11 @@ export default function Navbar() {
         }
 
         [data-theme="dark"] .nav-drawer-signin {
-          background: #0f766e;
+          background: #e04e2a;
         }
 
         [data-theme="dark"] .nav-drawer-signin:hover {
-          background: #14b8a6;
+          background: #f06840;
         }
       `}</style>
     </nav>

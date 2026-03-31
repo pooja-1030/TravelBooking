@@ -33,7 +33,7 @@ export default function Footer() {
         }
 
         .ft-logo:hover {
-          color: #0f766e;
+          color: #e04e2a;
         }
 
         .ft-description {
@@ -69,7 +69,7 @@ export default function Footer() {
         }
 
         .ft-links a:hover {
-          color: #0f766e;
+          color: #e04e2a;
         }
 
         .ft-bottom {
@@ -102,7 +102,7 @@ export default function Footer() {
         }
 
         .ft-socials a:hover {
-          color: #0f766e;
+          color: #e04e2a;
         }
 
         @media (max-width: 768px) {
@@ -146,7 +146,7 @@ export default function Footer() {
         [data-theme="dark"] .ft-links a:hover,
         [data-theme="dark"] .ft-socials a:hover,
         [data-theme="dark"] .ft-logo:hover {
-          color: #0f766e;
+          color: #e04e2a;
         }
 
         [data-theme="dark"] .ft-bottom {

@@ -348,7 +348,7 @@ const styles = `
   }
   .hp-search-btn {
     padding: 14px 32px;
-    background: #0f766e;
+    background: #e04e2a;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -425,7 +425,7 @@ const styles = `
     font-weight: 500;
   }
   .hp-card-price {
-    color: #0f766e;
+    color: #e04e2a;
     font-weight: 600;
   }
   .hp-card-link {
@@ -477,7 +477,7 @@ const styles = `
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   }
   .hp-cat-card:hover {
-    border-color: #0f766e;
+    border-color: #e04e2a;
     box-shadow: 0 4px 12px rgba(15, 118, 110, 0.1);
   }
   .hp-cat-name {
@@ -499,7 +499,7 @@ const styles = `
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #0f766e;
+    background: #e04e2a;
     margin-bottom: 20px;
   }
   .hp-feature-title {
@@ -521,7 +521,7 @@ const styles = `
   .hp-testimonial-card {
     background: #ffffff;
     border: 1px solid #e5e7eb;
-    border-left: 3px solid #0f766e;
+    border-left: 3px solid #e04e2a;
     border-radius: 12px;
     padding: 32px 28px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -592,11 +592,11 @@ const styles = `
     transition: border-color 0.2s ease;
   }
   .hp-newsletter-input:focus {
-    border-color: #0f766e;
+    border-color: #e04e2a;
   }
   .hp-newsletter-btn {
     padding: 14px 28px;
-    background: #0f766e;
+    background: #e04e2a;
     color: #ffffff;
     border: none;
     border-radius: 8px;
@@ -673,7 +673,7 @@ const styles = `
     border-color: #2a2d35;
   }
   [data-theme="dark"] .hp-cat-card:hover {
-    border-color: #0f766e;
+    border-color: #e04e2a;
     box-shadow: 0 4px 12px rgba(15, 118, 110, 0.15);
   }
   [data-theme="dark"] .hp-cat-name { color: #f5f6f8; }
@@ -688,7 +688,7 @@ const styles = `
   [data-theme="dark"] .hp-testimonial-card {
     background: #1a1d24;
     border-color: #2a2d35;
-    border-left-color: #0f766e;
+    border-left-color: #e04e2a;
   }
   [data-theme="dark"] .hp-testimonial-text { color: #a0a3ab; }
   [data-theme="dark"] .hp-testimonial-name { color: #f5f6f8; }
@@ -706,7 +706,7 @@ const styles = `
     color: #f5f6f8;
   }
   [data-theme="dark"] .hp-newsletter-input:focus {
-    border-color: #0f766e;
+    border-color: #e04e2a;
   }
 
   [data-theme="dark"] .hp-search-bar {

@@ -6,7 +6,7 @@ import { CITY_LIST } from '../data/travelData'
 const MOCK_MEMBERS = [
   { name: 'You', avatar: 'Y', color: '#0ea5e9' },
   { name: 'Alex', avatar: 'A', color: '#f97316' },
-  { name: 'Sam', avatar: 'S', color: '#14b8a6' },
+  { name: 'Sam', avatar: 'S', color: '#e04e2a' },
   { name: 'Jordan', avatar: 'J', color: '#6366f1' },
 ]
 
