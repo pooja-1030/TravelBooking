@@ -19,10 +19,9 @@ export default function DashboardPage() {
     return (
       <div className="dash-login-prompt">
         <div className="dash-login-card">
-          <span className="dash-login-icon">{'\ud83d\udd12'}</span>
           <h2>Sign in to access your Dashboard</h2>
           <p>Track your trips, manage your wishlist, earn rewards, and get personalized recommendations.</p>
-          <button className="btn btn-primary" onClick={() => setShowAuth(true)}>Sign In / Sign Up</button>
+          <button className="btn btn-primary" onClick={() => setShowAuth(true)}>Sign In</button>
         </div>
       </div>
     )
@@ -31,20 +30,18 @@ export default function DashboardPage() {
   const levelProgress = ((gamification.points % 500) / 500) * 100
   const nextLevel = (gamification.level) * 500
   const pointsToNext = nextLevel - gamification.points
-
   const recommended = CITY_LIST.filter(c => !recentlyViewed.find(r => r.id === c.id)).slice(0, 4)
 
   return (
     <div className="dashboard">
-      {/* Dashboard Header */}
       <div className="dash-header">
         <div className="container">
           <div className="dash-header-content">
             <div className="dash-user-info">
               <div className="dash-avatar">{user.avatar}</div>
               <div>
-                <h1>Welcome back, {user.name}!</h1>
-                <p>Level {gamification.level} Traveler &bull; {gamification.points} points</p>
+                <h1>Welcome back, {user.name}</h1>
+                <p>Level {gamification.level} Traveler &middot; {gamification.points} points</p>
               </div>
             </div>
             <div className="dash-quick-stats">
@@ -57,7 +54,6 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Tab Navigation */}
       <div className="dash-tabs">
         <div className="container">
           <div className="dash-tabs-inner">
@@ -71,10 +67,8 @@ export default function DashboardPage() {
       </div>
 
       <div className="container dash-content">
-        {/* ── OVERVIEW TAB ── */}
         {activeTab === 'Overview' && (
           <>
-            {/* Level Progress */}
             <div className="dash-section">
               <div className="dash-level-card">
                 <div className="dash-level-info">
@@ -88,10 +82,9 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Recently Viewed */}
             {recentlyViewed.length > 0 && (
               <div className="dash-section">
-                <h2 className="dash-section-title">{'\ud83d\udd70\ufe0f'} Recently Viewed</h2>
+                <h2 className="dash-section-title">Recently Viewed</h2>
                 <div className="dash-scroll-row">
                   {recentlyViewed.slice(0, 6).map(item => (
                     <Link to={`/city/${item.id}`} key={item.id} className="dash-recent-card">
@@ -106,9 +99,8 @@ export default function DashboardPage() {
               </div>
             )}
 
-            {/* Personalized Recommendations */}
             <div className="dash-section">
-              <h2 className="dash-section-title">{'\ud83e\udde0'} Recommended for You</h2>
+              <h2 className="dash-section-title">Recommended for You</h2>
               <div className="dash-reco-grid">
                 {recommended.map(city => (
                   <Link to={`/city/${city.id}`} key={city.id} className="dash-reco-card">
@@ -118,7 +110,7 @@ export default function DashboardPage() {
                     </div>
                     <div className="dash-reco-body">
                       <h4>{city.name}</h4>
-                      <p>{city.country} &bull; {'\u2b50'} {city.rating}</p>
+                      <p>{city.country} &middot; {city.rating} rating</p>
                       <span className="dash-reco-price">From {convertPrice(city.price)}</span>
                     </div>
                   </Link>
@@ -126,38 +118,35 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Quick Actions */}
             <div className="dash-section">
-              <h2 className="dash-section-title">{'\u26a1'} Quick Actions</h2>
+              <h2 className="dash-section-title">Quick Actions</h2>
               <div className="dash-actions-grid">
                 <Link to="/planner" className="dash-action-card">
-                  <span>{'\ud83e\udde0'}</span><h4>AI Trip Planner</h4><p>Plan your next adventure with AI</p>
+                  <h4>AI Trip Planner</h4><p>Plan your next adventure with AI</p>
                 </Link>
                 <Link to="/group-trip" className="dash-action-card">
-                  <span>{'\ud83e\uddd1\u200d\ud83e\udd1d\u200d\ud83e\uddd1'}</span><h4>Group Trip</h4><p>Plan a trip with friends</p>
+                  <h4>Group Trip</h4><p>Plan a trip with friends</p>
                 </Link>
                 <Link to="/search" className="dash-action-card">
-                  <span>{'\ud83d\udd0d'}</span><h4>Explore</h4><p>Discover new destinations</p>
+                  <h4>Explore</h4><p>Discover new destinations</p>
                 </Link>
                 <button className="dash-action-card" onClick={() => addPoints(25)}>
-                  <span>{'\ud83c\udfb0'}</span><h4>Daily Bonus</h4><p>Claim 25 bonus points</p>
+                  <h4>Daily Bonus</h4><p>Claim 25 bonus points</p>
                 </button>
               </div>
             </div>
           </>
         )}
 
-        {/* ── WISHLIST TAB ── */}
         {activeTab === 'Wishlist' && (
           <>
-            {/* Collections */}
             <div className="dash-section">
               <div className="dash-section-header">
-                <h2 className="dash-section-title">{'\ud83d\udcda'} Collections</h2>
+                <h2 className="dash-section-title">Collections</h2>
                 <button className="btn btn-outline btn-sm" onClick={() => setShowNewColl(!showNewColl)}>+ New Collection</button>
               </div>
               {showNewColl && (
-                <form className="dash-new-coll" onSubmit={e => { e.preventDefault(); if (newCollName.trim()) { createCollection(newCollName, '\ud83d\udccc'); setNewCollName(''); setShowNewColl(false) } }}>
+                <form className="dash-new-coll" onSubmit={e => { e.preventDefault(); if (newCollName.trim()) { createCollection(newCollName, ''); setNewCollName(''); setShowNewColl(false) } }}>
                   <input type="text" value={newCollName} onChange={e => setNewCollName(e.target.value)} placeholder="Collection name..." />
                   <button type="submit" className="btn btn-primary btn-sm">Create</button>
                 </form>
@@ -165,7 +154,6 @@ export default function DashboardPage() {
               <div className="dash-collections-grid">
                 {collections.map(c => (
                   <div key={c.id} className="dash-collection-card">
-                    <span className="dash-collection-icon">{c.icon}</span>
                     <h4>{c.name}</h4>
                     <p>{(c.items || []).length} items</p>
                   </div>
@@ -173,12 +161,10 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Wishlist Items */}
             <div className="dash-section">
-              <h2 className="dash-section-title">{'\u2764\ufe0f'} Saved Items ({wishlist.length})</h2>
+              <h2 className="dash-section-title">Saved Items ({wishlist.length})</h2>
               {wishlist.length === 0 ? (
                 <div className="dash-empty">
-                  <span>{'\ud83d\udc94'}</span>
                   <h3>Your wishlist is empty</h3>
                   <p>Start exploring and save destinations you love!</p>
                   <Link to="/search" className="btn btn-primary">Explore Destinations</Link>
@@ -205,13 +191,11 @@ export default function DashboardPage() {
           </>
         )}
 
-        {/* ── MY TRIPS TAB ── */}
         {activeTab === 'My Trips' && (
           <div className="dash-section">
-            <h2 className="dash-section-title">{'\ud83e\uddf3'} My Trips ({savedTrips.length})</h2>
+            <h2 className="dash-section-title">My Trips ({savedTrips.length})</h2>
             {savedTrips.length === 0 ? (
               <div className="dash-empty">
-                <span>{'\u2708\ufe0f'}</span>
                 <h3>No trips booked yet</h3>
                 <p>Your booked trips will appear here. Start planning!</p>
                 <Link to="/search" className="btn btn-primary">Find Destinations</Link>
@@ -225,9 +209,9 @@ export default function DashboardPage() {
                       <span className={`dash-trip-status ${trip.status || 'upcoming'}`}>{trip.status || 'Upcoming'}</span>
                     </div>
                     <div className="dash-trip-details">
-                      <p>{'\ud83d\udcc5'} {trip.dates || 'Dates TBD'}</p>
-                      <p>{'\ud83c\udfe8'} {trip.hotel || 'Hotel TBD'}</p>
-                      <p>{'\ud83d\udcb0'} {convertPrice(trip.totalCost || 0)}</p>
+                      <p>{trip.dates || 'Dates TBD'}</p>
+                      <p>{trip.hotel || 'Hotel TBD'}</p>
+                      <p>{convertPrice(trip.totalCost || 0)}</p>
                     </div>
                     <Link to={`/city/${trip.cityId}`} className="btn btn-outline btn-sm">View Details</Link>
                   </div>
@@ -237,16 +221,14 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* ── ITINERARIES TAB ── */}
         {activeTab === 'Itineraries' && (
           <div className="dash-section">
             <div className="dash-section-header">
-              <h2 className="dash-section-title">{'\ud83d\udccb'} Saved Itineraries ({savedItineraries.length})</h2>
+              <h2 className="dash-section-title">Saved Itineraries ({savedItineraries.length})</h2>
               <Link to="/planner" className="btn btn-primary btn-sm">+ New Itinerary</Link>
             </div>
             {savedItineraries.length === 0 ? (
               <div className="dash-empty">
-                <span>{'\ud83d\uddd3\ufe0f'}</span>
                 <h3>No itineraries yet</h3>
                 <p>Use the AI Trip Planner to create your first itinerary!</p>
                 <Link to="/planner" className="btn btn-primary">Plan a Trip</Link>
@@ -259,7 +241,7 @@ export default function DashboardPage() {
                       <h3>{it.name || it.destination}</h3>
                       <button className="dash-itinerary-delete" onClick={() => deleteItinerary(it.id)}>&times;</button>
                     </div>
-                    <p>{it.days?.length || 0} days &bull; {it.destination}</p>
+                    <p>{it.days?.length || 0} days &middot; {it.destination}</p>
                     <div className="dash-itinerary-preview">
                       {(it.days || []).slice(0, 3).map((day, i) => (
                         <div key={i} className="dash-itinerary-day">
@@ -275,10 +257,8 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* ── REWARDS TAB ── */}
         {activeTab === 'Rewards' && (
           <>
-            {/* Points Overview */}
             <div className="dash-section">
               <div className="dash-rewards-hero">
                 <div className="dash-rewards-points">
@@ -296,16 +276,14 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Badges */}
             <div className="dash-section">
-              <h2 className="dash-section-title">{'\ud83c\udfc5'} Badges</h2>
+              <h2 className="dash-section-title">Badges</h2>
               <div className="dash-badges-grid">
                 {BADGES.map(badge => {
                   const earned = gamification.earnedBadges.includes(badge.id)
                   const progress = Math.min((gamification[badge.type] || 0) / badge.requirement * 100, 100)
                   return (
                     <div key={badge.id} className={`dash-badge-card${earned ? ' earned' : ''}`}>
-                      <span className="dash-badge-icon">{badge.icon}</span>
                       <h4>{badge.name}</h4>
                       <p>{badge.desc}</p>
                       {!earned && (
@@ -314,23 +292,22 @@ export default function DashboardPage() {
                           <small>{gamification[badge.type] || 0}/{badge.requirement}</small>
                         </div>
                       )}
-                      {earned && <span className="dash-badge-earned">{'\u2705'} Earned!</span>}
+                      {earned && <span className="dash-badge-earned">Earned</span>}
                     </div>
                   )
                 })}
               </div>
             </div>
 
-            {/* How to Earn */}
             <div className="dash-section">
-              <h2 className="dash-section-title">{'\ud83d\udca1'} How to Earn Points</h2>
+              <h2 className="dash-section-title">How to Earn Points</h2>
               <div className="dash-earn-grid">
-                <div className="dash-earn-item"><span>{'\ud83d\udd0d'}</span><h4>Explore</h4><p>+10 pts per destination viewed</p></div>
-                <div className="dash-earn-item"><span>{'\u2764\ufe0f'}</span><h4>Wishlist</h4><p>+10 pts per item saved</p></div>
-                <div className="dash-earn-item"><span>{'\ud83d\udccb'}</span><h4>Plan</h4><p>+50 pts per itinerary created</p></div>
-                <div className="dash-earn-item"><span>{'\u2708\ufe0f'}</span><h4>Book</h4><p>+100 pts per trip booked</p></div>
-                <div className="dash-earn-item"><span>{'\ud83e\uddd1\u200d\ud83e\udd1d\u200d\ud83e\uddd1'}</span><h4>Group Trip</h4><p>+75 pts per group created</p></div>
-                <div className="dash-earn-item"><span>{'\ud83c\udfb0'}</span><h4>Daily Bonus</h4><p>+25 pts daily claim</p></div>
+                <div className="dash-earn-item"><h4>Explore</h4><p>+10 pts per destination viewed</p></div>
+                <div className="dash-earn-item"><h4>Wishlist</h4><p>+10 pts per item saved</p></div>
+                <div className="dash-earn-item"><h4>Plan</h4><p>+50 pts per itinerary created</p></div>
+                <div className="dash-earn-item"><h4>Book</h4><p>+100 pts per trip booked</p></div>
+                <div className="dash-earn-item"><h4>Group Trip</h4><p>+75 pts per group created</p></div>
+                <div className="dash-earn-item"><h4>Daily Bonus</h4><p>+25 pts daily claim</p></div>
               </div>
             </div>
           </>

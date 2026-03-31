@@ -76,7 +76,7 @@ export default function SearchPage() {
             {filtered.length} destination{filtered.length !== 1 ? 's' : ''} found
           </p>
           <div className="search-page-bar">
-            <span className="icon">{'\ud83d\udd0e'}</span>
+            <span className="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
             <input type="text" placeholder="Search destinations, countries..." value={query} onChange={e => setQuery(e.target.value)} />
           </div>
         </div>

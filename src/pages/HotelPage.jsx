@@ -90,12 +90,12 @@ export default function HotelPage() {
             className={`hotel-gallery-wishlist${wishlisted ? ' active' : ''}`}
             onClick={() => toggleWishlist({ id: hotel.id, type: 'hotel', name: hotel.name, image: hotel.image, price: hotel.price, location: hotel.location })}
           >
-            {wishlisted ? '\u2764\ufe0f' : '\ud83e\udd0d'}
+            {wishlisted ? 'Saved' : 'Save'}
           </button>
           {/* Price Tracking Badge */}
           {priceDropped && (
             <div className="hotel-price-alert">
-              {'\ud83d\udcb0'} Price dropped by {convertPrice(Math.abs(priceChange))}!
+              Price dropped by {convertPrice(Math.abs(priceChange))}!
             </div>
           )}
         </div>
@@ -114,7 +114,7 @@ export default function HotelPage() {
           <div className="hotel-title-section">
             <div>
               <h1>{hotel.name}</h1>
-              <p className="hotel-location">{'\ud83d\udccd'} {hotel.location}</p>
+              <p className="hotel-location">{hotel.location}</p>
             </div>
             <div className="hotel-rating-badge">
               <span className="hotel-rating-score">{hotel.rating}</span>
@@ -125,10 +125,10 @@ export default function HotelPage() {
 
           {/* Smart Travel Insights */}
           <div className="hotel-insights">
-            <div className="hotel-insight"><span>{'\ud83c\udf24\ufe0f'}</span><div><strong>Weather</strong><p>{city.weather?.slice(0, 60) || 'Check local forecast'}...</p></div></div>
-            <div className="hotel-insight"><span>{'\ud83d\udc65'}</span><div><strong>Crowd Level</strong><p>{Math.random() > 0.5 ? 'Moderate' : 'Low'} this week</p></div></div>
-            <div className="hotel-insight"><span>{'\ud83d\udee1\ufe0f'}</span><div><strong>Safety Score</strong><p>{(4 + Math.random()).toFixed(1)}/5 - {hotel.rating >= 4.5 ? 'Very Safe' : 'Safe'}</p></div></div>
-            <div className="hotel-insight"><span>{'\ud83d\udcc5'}</span><div><strong>Best Time</strong><p>{city.bestTimeToVisit?.slice(0, 30) || 'Year round'}</p></div></div>
+            <div className="hotel-insight"><span>Weather</span><div><strong>Weather</strong><p>{city.weather?.slice(0, 60) || 'Check local forecast'}...</p></div></div>
+            <div className="hotel-insight"><span>Crowd</span><div><strong>Crowd Level</strong><p>{Math.random() > 0.5 ? 'Moderate' : 'Low'} this week</p></div></div>
+            <div className="hotel-insight"><span>Safety</span><div><strong>Safety Score</strong><p>{(4 + Math.random()).toFixed(1)}/5 - {hotel.rating >= 4.5 ? 'Very Safe' : 'Safe'}</p></div></div>
+            <div className="hotel-insight"><span>Calendar</span><div><strong>Best Time</strong><p>{city.bestTimeToVisit?.slice(0, 30) || 'Year round'}</p></div></div>
           </div>
 
           {/* Amenities */}
@@ -138,7 +138,7 @@ export default function HotelPage() {
               {(showAllAmenities ? allAmenities : allAmenities.slice(0, 8)).map(a => (
                 <div key={a} className="hotel-amenity">
                   <span className="hotel-amenity-icon">
-                    {a.includes('WiFi') ? '\ud83d\udcf6' : a.includes('Pool') ? '\ud83c\udfca' : a.includes('Breakfast') ? '\ud83c\udf73' : a.includes('Spa') ? '\ud83d\udcc6' : a.includes('View') ? '\ud83c\udf05' : a.includes('AC') ? '\u2744\ufe0f' : '\u2705'}
+                    {a.includes('WiFi') ? 'WiFi' : a.includes('Pool') ? 'Pool' : a.includes('Breakfast') ? 'Food' : a.includes('Spa') ? 'Spa' : a.includes('View') ? 'View' : a.includes('AC') ? 'AC' : '+'}
                   </span>
                   <span>{a}</span>
                 </div>
@@ -159,7 +159,7 @@ export default function HotelPage() {
                 <div key={room.id} className={`hotel-room-card${selectedRoom?.id === room.id ? ' selected' : ''}${room.available <= 2 ? ' low-avail' : ''}`}>
                   <div className="hotel-room-img">
                     <img src={room.img} alt={room.name} onError={e => { e.target.src = hotel.image }} />
-                    {room.available <= 2 && <span className="hotel-room-urgent">{'\ud83d\udd25'} Only {room.available} left!</span>}
+                    {room.available <= 2 && <span className="hotel-room-urgent">Only {room.available} left!</span>}
                   </div>
                   <div className="hotel-room-body">
                     <h3>{room.name}</h3>
@@ -210,7 +210,7 @@ export default function HotelPage() {
 
             {priceDropped && (
               <div className="hotel-booking-deal">
-                {'\ud83d\udcc9'} Price is {Math.abs(priceChange)}% lower than usual! Book within 2 days.
+                Price is {Math.abs(priceChange)}% lower than usual! Book within 2 days.
               </div>
             )}
 

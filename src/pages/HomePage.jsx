@@ -1,138 +1,105 @@
 import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useApp } from '../contexts/AppContext'
-import { CITY_LIST, CATEGORIES, FEATURES, TESTIMONIALS, heroImg } from '../data/travelData'
+import { CITIES, CATEGORIES, FEATURES, TESTIMONIALS, heroImg } from '../data/travelData'
 
 export default function HomePage() {
-  const [loading, setLoading] = useState(true)
   const [destination, setDestination] = useState('')
-  const navigate = useNavigate()
-  const { toggleWishlist, isWishlisted, convertPrice, addRecentlyViewed } = useApp()
+  const [date, setDate] = useState('')
+  const [email, setEmail] = useState('')
+  const { toggleWishlist, isWishlisted, convertPrice } = useApp()
+  const cityList = Object.values(CITIES)
+  const popularCities = cityList.slice(0, 4)
+  const recommendedCities = cityList.slice(2, 5)
 
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 600)
-    return () => clearTimeout(t)
-  }, [])
-
-  useEffect(() => {
-    const els = document.querySelectorAll('.reveal')
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }
-      }),
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('hp-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     )
-    els.forEach(el => observer.observe(el))
+    const els = document.querySelectorAll('.hp-reveal')
+    els.forEach((el) => observer.observe(el))
     return () => observer.disconnect()
-  }, [loading])
+  }, [])
 
   const handleSearch = (e) => {
     e.preventDefault()
-    navigate(`/search?q=${encodeURIComponent(destination)}`)
+    if (destination) {
+      window.location.href = `/search?q=${encodeURIComponent(destination)}`
+    }
   }
 
-  const popularCities = CITY_LIST.slice(0, 4)
-  const recommendedCities = CITY_LIST.slice(0, 3)
-
-  if (loading) {
-    return (
-      <>
-        <div className="lux-loading-screen">
-          <span className="lux-loading-text">WANDERLUST</span>
-        </div>
-        <style>{`
-          .lux-loading-screen {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: #0a0a0a;
-          }
-          .lux-loading-text {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            background: linear-gradient(
-              90deg,
-              #c9a96e 0%,
-              #f0dca0 25%,
-              #c9a96e 50%,
-              #f0dca0 75%,
-              #c9a96e 100%
-            );
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 2s ease-in-out infinite;
-          }
-          @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-          }
-        `}</style>
-      </>
-    )
+  const handleSubscribe = (e) => {
+    e.preventDefault()
+    if (email) {
+      setEmail('')
+    }
   }
+
+  const stripEmoji = (str) => str.replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27BF}]|[\u{FE00}-\u{FEFF}]|[\u{1F900}-\u{1F9FF}]|[\u{200D}\u{20E3}\u{FE0F}]/gu, '').trim()
 
   return (
     <>
-      {/* ===== HERO ===== */}
-      <section className="lux-hero">
-        <div className="lux-hero-img-wrap">
-          <img src={heroImg} alt="Luxury travel destination" className="lux-hero-img" />
-        </div>
-        <div className="lux-hero-overlay" />
-        <div className="lux-hero-content">
-          <span className="lux-hero-label">LUXURY TRAVEL EXPERIENCES</span>
-          <h1 className="lux-hero-heading">Discover Extraordinary Destinations</h1>
-          <p className="lux-hero-subtitle">
-            Curated journeys to the world's most captivating places, designed for the discerning traveler who seeks beauty, comfort, and wonder.
+      <style>{styles}</style>
+
+      {/* ---- HERO ---- */}
+      <section className="hp-hero">
+        <div className="hp-hero-bg" style={{ backgroundImage: `url(${heroImg})` }} />
+        <div className="hp-hero-overlay" />
+        <div className="hp-hero-content">
+          <span className="hp-hero-label">TRAVEL BOOKING PLATFORM</span>
+          <h1 className="hp-hero-heading">
+            Discover your next<br />great adventure
+          </h1>
+          <p className="hp-hero-subtitle">
+            Explore curated destinations, hotels, and experiences worldwide.
           </p>
-          <form onSubmit={handleSearch} className="lux-hero-search">
-            <input
-              type="text"
-              placeholder="Where shall we take you?"
+          <form className="hp-search-bar" onSubmit={handleSearch}>
+            <select
+              className="hp-search-select"
               value={destination}
-              onChange={e => setDestination(e.target.value)}
-              className="lux-hero-input"
+              onChange={(e) => setDestination(e.target.value)}
+            >
+              <option value="">Where to?</option>
+              {cityList.map((city) => (
+                <option key={city.id} value={city.name}>{city.name}, {city.country}</option>
+              ))}
+            </select>
+            <input
+              type="date"
+              className="hp-search-date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
             />
-            <button type="submit" className="lux-hero-btn">Search</button>
+            <button type="submit" className="hp-search-btn">Search</button>
           </form>
         </div>
-        <div className="lux-scroll-indicator">
-          <div className="lux-scroll-line" />
-        </div>
       </section>
 
-      {/* ===== POPULAR DESTINATIONS ===== */}
-      <section className="lux-section">
-        <div className="lux-section-inner">
-          <div className="reveal lux-section-header">
-            <div className="lux-gold-line" />
-            <h2 className="lux-section-title">Popular Destinations</h2>
-            <p className="lux-section-subtitle">Trending places our travelers love this season.</p>
-          </div>
-          <div className="lux-grid-4">
-            {popularCities.map((city, i) => (
-              <Link
-                to={`/city/${city.id}`}
-                key={city.id}
-                className="reveal lux-dest-card"
-                onClick={() => addRecentlyViewed({ id: city.id, name: city.name, image: city.heroImage, country: city.country })}
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <div className="lux-dest-card-img-wrap">
-                  <img src={city.heroImage} alt={city.name} loading="lazy" className="lux-dest-card-img" />
-                  <div className="lux-dest-card-img-overlay" />
+      {/* ---- POPULAR DESTINATIONS ---- */}
+      <section className="hp-section hp-bg-white">
+        <div className="hp-container hp-reveal">
+          <span className="hp-section-label">POPULAR DESTINATIONS</span>
+          <h2 className="hp-section-heading">Trending places to visit</h2>
+          <div className="hp-grid hp-grid-4">
+            {popularCities.map((city) => (
+              <Link to={`/city/${city.id}`} key={city.id} className="hp-card hp-card-dest">
+                <div className="hp-card-img-wrap">
+                  <img src={city.heroImage} alt={city.name} className="hp-card-img" loading="lazy" />
                 </div>
-                <div className="lux-dest-card-body">
-                  <h3 className="lux-dest-card-name">{city.name}</h3>
-                  <p className="lux-dest-card-country">{city.country}</p>
-                  <div className="lux-dest-card-meta">
-                    <span className="lux-dest-card-rating">{'\u2605'} {city.rating}</span>
-                    <span className="lux-dest-card-price">From {convertPrice(city.price)}</span>
+                <div className="hp-card-body">
+                  <h3 className="hp-card-title">{city.name}</h3>
+                  <p className="hp-card-country">{city.country}</p>
+                  <div className="hp-card-meta">
+                    <span className="hp-card-rating">{city.rating} rating</span>
+                    <span className="hp-card-price">From {convertPrice(city.price)}</span>
                   </div>
                 </div>
               </Link>
@@ -141,142 +108,84 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== TRAVEL CATEGORIES ===== */}
-      <section className="lux-section lux-section--categories">
-        <div className="lux-section-inner">
-          <div className="reveal lux-section-header">
-            <div className="lux-gold-line" />
-            <h2 className="lux-section-title">Explore by Category</h2>
-            <p className="lux-section-subtitle">Find experiences that match your travel style.</p>
-          </div>
-          <div className="lux-categories-grid">
+      {/* ---- CATEGORIES ---- */}
+      <section className="hp-section hp-bg-gray">
+        <div className="hp-container hp-reveal">
+          <h2 className="hp-section-heading">Browse by category</h2>
+          <div className="hp-categories-row">
             {CATEGORIES.map((cat, i) => (
-              <Link
-                to={`/search?type=${cat.name.toLowerCase()}`}
-                key={cat.name}
-                className="reveal lux-category-card"
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                <span className="lux-category-icon">{cat.icon}</span>
-                <span className="lux-category-name">{cat.name}</span>
+              <Link to={`/search?q=${encodeURIComponent(stripEmoji(cat.name))}`} key={i} className="hp-cat-card">
+                <span className="hp-cat-name">{stripEmoji(cat.name)}</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== RECOMMENDED ===== */}
-      <section className="lux-section">
-        <div className="lux-section-inner">
-          <div className="reveal lux-section-header">
-            <div className="lux-gold-line" />
-            <h2 className="lux-section-title">Recommended for You</h2>
-            <p className="lux-section-subtitle">Handpicked stays based on top ratings and trending interest.</p>
-          </div>
-          <div className="lux-grid-3">
-            {recommendedCities.map((city, i) => {
-              const wishlisted = isWishlisted(city.id, 'destination')
-              return (
-                <div
-                  key={city.id}
-                  className="reveal lux-rec-card"
-                  style={{ transitionDelay: `${i * 100}ms` }}
-                >
-                  <div className="lux-rec-card-img-wrap">
-                    <img
-                      src={city.images?.[1] || city.heroImage}
-                      alt={city.name}
-                      loading="lazy"
-                      className="lux-rec-card-img"
-                    />
-                    <button
-                      onClick={() => toggleWishlist({
-                        id: city.id,
-                        type: 'destination',
-                        name: city.name,
-                        image: city.heroImage,
-                        price: city.price,
-                        country: city.country,
-                      })}
-                      aria-label="Toggle wishlist"
-                      className={`lux-wishlist-btn ${wishlisted ? 'lux-wishlist-btn--active' : ''}`}
-                    >
-                      {wishlisted ? '\u2764\ufe0f' : '\u2661'}
-                    </button>
-                  </div>
-                  <div className="lux-rec-card-body">
-                    <h3 className="lux-rec-card-name">{city.name}</h3>
-                    <p className="lux-rec-card-country">{city.country}</p>
-                    <div className="lux-rec-card-rating-row">
-                      <span className="lux-rec-card-rating">{'\u2605'} {city.rating}</span>
-                      <span className="lux-rec-card-reviews">({city.reviewCount} reviews)</span>
-                    </div>
-                    <div className="lux-rec-card-footer">
-                      <span className="lux-rec-card-price">
-                        {convertPrice(city.price)} <span className="lux-rec-card-price-unit">/trip</span>
-                      </span>
-                      <Link
-                        to={`/city/${city.id}`}
-                        onClick={() => addRecentlyViewed({ id: city.id, name: city.name, image: city.heroImage, country: city.country })}
-                        className="lux-rec-card-link"
-                      >
-                        View Details &rarr;
-                      </Link>
-                    </div>
+      {/* ---- RECOMMENDED ---- */}
+      <section className="hp-section hp-bg-white">
+        <div className="hp-container hp-reveal">
+          <h2 className="hp-section-heading">Recommended for you</h2>
+          <div className="hp-grid hp-grid-3">
+            {recommendedCities.map((city) => (
+              <div key={city.id} className="hp-card hp-card-reco">
+                <div className="hp-card-img-wrap">
+                  <Link to={`/city/${city.id}`}>
+                    <img src={city.heroImage} alt={city.name} className="hp-card-img" loading="lazy" />
+                  </Link>
+                  <button
+                    className={`hp-wish-btn ${isWishlisted(city.id, 'city') ? 'hp-wish-active' : ''}`}
+                    onClick={() => toggleWishlist({ id: city.id, type: 'city', name: city.name, image: city.heroImage, country: city.country })}
+                    aria-label={isWishlisted(city.id, 'city') ? 'Remove from wishlist' : 'Add to wishlist'}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill={isWishlisted(city.id, 'city') ? '#ef4444' : 'none'} stroke={isWishlisted(city.id, 'city') ? '#ef4444' : '#ffffff'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                    </svg>
+                  </button>
+                </div>
+                <div className="hp-card-body">
+                  <Link to={`/city/${city.id}`} className="hp-card-link">
+                    <h3 className="hp-card-title">{city.name}</h3>
+                  </Link>
+                  <p className="hp-card-country">{city.country}</p>
+                  <div className="hp-card-meta">
+                    <span className="hp-card-rating">{city.rating} rating</span>
+                    <span className="hp-card-price">From {convertPrice(city.price)}</span>
                   </div>
                 </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FEATURES ===== */}
-      <section className="lux-section">
-        <div className="lux-section-inner">
-          <div className="reveal lux-section-header">
-            <div className="lux-gold-line" />
-            <h2 className="lux-section-title">Everything You Need</h2>
-            <p className="lux-section-subtitle">Plan, compare, and book your perfect trip in one place.</p>
-          </div>
-          <div className="lux-grid-4">
-            {FEATURES.map((f, i) => (
-              <div
-                key={f.title}
-                className="reveal lux-feature-card"
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <div className="lux-feature-icon">{f.icon}</div>
-                <h3 className="lux-feature-title">{f.title}</h3>
-                <p className="lux-feature-desc">{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== TESTIMONIALS ===== */}
-      <section className="lux-section">
-        <div className="lux-section-inner">
-          <div className="reveal lux-section-header">
-            <div className="lux-gold-line" />
-            <h2 className="lux-section-title">What Travelers Say</h2>
-            <p className="lux-section-subtitle">Real stories from people who explored the world with us.</p>
+      {/* ---- WHY CHOOSE US ---- */}
+      <section className="hp-section hp-bg-gray">
+        <div className="hp-container hp-reveal">
+          <h2 className="hp-section-heading">Why travelers choose us</h2>
+          <div className="hp-grid hp-grid-4">
+            {FEATURES.map((feat, i) => (
+              <div key={i} className="hp-feature-card">
+                <div className="hp-feature-dot" />
+                <h3 className="hp-feature-title">{feat.title}</h3>
+                <p className="hp-feature-desc">{feat.desc}</p>
+              </div>
+            ))}
           </div>
-          <div className="lux-grid-3">
+        </div>
+      </section>
+
+      {/* ---- TESTIMONIALS ---- */}
+      <section className="hp-section hp-bg-white">
+        <div className="hp-container hp-reveal">
+          <h2 className="hp-section-heading">What our travelers say</h2>
+          <div className="hp-grid hp-grid-3">
             {TESTIMONIALS.map((t, i) => (
-              <div
-                key={t.name}
-                className="reveal lux-testimonial-card"
-                style={{ transitionDelay: `${i * 80}ms` }}
-              >
-                <p className="lux-testimonial-text">&ldquo;{t.text}&rdquo;</p>
-                <div className="lux-testimonial-author">
-                  <div className="lux-testimonial-avatar">{t.initials}</div>
-                  <div>
-                    <div className="lux-testimonial-name">{t.name}</div>
-                    <div className="lux-testimonial-role">{t.role}</div>
-                  </div>
+              <div key={i} className="hp-testimonial-card">
+                <p className="hp-testimonial-text">{t.text}</p>
+                <div className="hp-testimonial-author">
+                  <span className="hp-testimonial-name">{t.name}</span>
+                  <span className="hp-testimonial-role">{t.role}</span>
                 </div>
               </div>
             ))}
@@ -284,700 +193,542 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== NEWSLETTER ===== */}
-      <section className="lux-section">
-        <div className="lux-section-inner">
-          <div className="reveal lux-newsletter">
-            <h2 className="lux-newsletter-title">Stay in the Loop</h2>
-            <p className="lux-newsletter-desc">
-              Get the best travel deals and inspiration delivered to your inbox.
-            </p>
-            <form onSubmit={e => e.preventDefault()} className="lux-newsletter-form">
+      {/* ---- NEWSLETTER ---- */}
+      <section className="hp-section hp-bg-gray">
+        <div className="hp-container hp-reveal">
+          <div className="hp-newsletter-card">
+            <h2 className="hp-newsletter-heading">Stay updated</h2>
+            <p className="hp-newsletter-subtitle">Get the latest deals and travel inspiration.</p>
+            <form className="hp-newsletter-form" onSubmit={handleSubscribe}>
               <input
                 type="email"
-                placeholder="Your email address"
+                className="hp-newsletter-input"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
-                className="lux-newsletter-input"
               />
-              <button type="submit" className="lux-newsletter-btn">Subscribe</button>
+              <button type="submit" className="hp-newsletter-btn">Subscribe</button>
             </form>
           </div>
         </div>
       </section>
-
-      {/* ===== STYLES ===== */}
-      <style>{`
-        /* ---------- BASE / FONTS ---------- */
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap');
-
-        /* ---------- REVEAL ANIMATION ---------- */
-        .reveal {
-          opacity: 0;
-          transform: translateY(32px);
-          transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .reveal.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        /* ---------- HERO ---------- */
-        .lux-hero {
-          position: relative;
-          height: 100vh;
-          min-height: 600px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          background: #0a0a0a;
-        }
-        .lux-hero-img-wrap {
-          position: absolute;
-          inset: 0;
-          overflow: hidden;
-        }
-        .lux-hero-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          animation: kenBurns 20s ease-in-out infinite alternate;
-        }
-        @keyframes kenBurns {
-          0% { transform: scale(1); }
-          100% { transform: scale(1.08); }
-        }
-        .lux-hero-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
-          z-index: 1;
-        }
-        .lux-hero-content {
-          position: relative;
-          z-index: 2;
-          text-align: center;
-          max-width: 720px;
-          padding: 0 24px;
-        }
-        .lux-hero-label {
-          display: inline-block;
-          font-size: 0.75rem;
-          font-weight: 500;
-          letter-spacing: 0.2em;
-          color: #c9a96e;
-          text-transform: uppercase;
-          margin-bottom: 20px;
-        }
-        .lux-hero-heading {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(2.8rem, 6vw, 4.5rem);
-          font-weight: 700;
-          color: #fff;
-          line-height: 1.1;
-          letter-spacing: -0.01em;
-          margin: 0 0 20px;
-        }
-        .lux-hero-subtitle {
-          font-size: clamp(1rem, 2vw, 1.15rem);
-          color: rgba(255,255,255,0.7);
-          line-height: 1.7;
-          margin: 0 0 44px;
-          max-width: 560px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .lux-hero-search {
-          display: flex;
-          max-width: 520px;
-          margin: 0 auto;
-          background: rgba(255,255,255,0.08);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border-radius: 100px;
-          border: 1px solid rgba(255,255,255,0.1);
-          overflow: hidden;
-          transition: border-color 0.3s ease;
-        }
-        .lux-hero-search:focus-within {
-          border-color: #c9a96e;
-        }
-        .lux-hero-input {
-          flex: 1;
-          border: none;
-          outline: none;
-          padding: 18px 26px;
-          font-size: 1rem;
-          color: #fff;
-          background: transparent;
-          font-family: inherit;
-        }
-        .lux-hero-input::placeholder {
-          color: rgba(255,255,255,0.4);
-        }
-        .lux-hero-btn {
-          border: none;
-          background: #c9a96e;
-          color: #0a0a0a;
-          padding: 18px 32px;
-          font-size: 0.95rem;
-          font-weight: 600;
-          cursor: pointer;
-          letter-spacing: 0.02em;
-          white-space: nowrap;
-          font-family: inherit;
-          transition: background 0.3s ease;
-        }
-        .lux-hero-btn:hover {
-          background: #d4b87a;
-        }
-
-        /* Scroll Indicator */
-        .lux-scroll-indicator {
-          position: absolute;
-          bottom: 40px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 2;
-          width: 1px;
-          height: 48px;
-          overflow: hidden;
-        }
-        .lux-scroll-line {
-          width: 1px;
-          height: 100%;
-          background: #c9a96e;
-          animation: scrollDown 2s ease-in-out infinite;
-        }
-        @keyframes scrollDown {
-          0% { transform: translateY(-100%); }
-          50% { transform: translateY(0); }
-          100% { transform: translateY(100%); }
-        }
-
-        /* ---------- SECTIONS ---------- */
-        .lux-section {
-          background: #0a0a0a;
-          padding: 120px 24px;
-        }
-        .lux-section--categories {
-          background: linear-gradient(180deg, #0d0d10 0%, #0a0a0a 100%);
-        }
-        .lux-section-inner {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        .lux-section-header {
-          text-align: center;
-          margin-bottom: 64px;
-        }
-        .lux-gold-line {
-          width: 48px;
-          height: 2px;
-          background: #c9a96e;
-          margin: 0 auto 24px;
-        }
-        .lux-section-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.8rem, 3vw, 2.6rem);
-          font-weight: 700;
-          color: #fff;
-          letter-spacing: -0.01em;
-          margin: 0 0 14px;
-        }
-        .lux-section-subtitle {
-          font-size: 1.05rem;
-          color: #8a8a8a;
-          max-width: 480px;
-          margin: 0 auto;
-          line-height: 1.6;
-        }
-
-        /* ---------- GRID LAYOUTS ---------- */
-        .lux-grid-4 {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 24px;
-        }
-        .lux-grid-3 {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 28px;
-        }
-
-        /* ---------- POPULAR DESTINATION CARDS ---------- */
-        .lux-dest-card {
-          text-decoration: none;
-          color: inherit;
-          background: #111116;
-          border-radius: 16px;
-          overflow: hidden;
-          border: 1px solid transparent;
-          transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        .lux-dest-card:hover {
-          border-color: rgba(201,169,110,0.25);
-          transform: translateY(-4px);
-          box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-        }
-        .lux-dest-card-img-wrap {
-          position: relative;
-          padding-top: 70%;
-          overflow: hidden;
-        }
-        .lux-dest-card-img {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .lux-dest-card:hover .lux-dest-card-img {
-          transform: scale(1.08);
-        }
-        .lux-dest-card-img-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(180deg, transparent 40%, rgba(201,169,110,0.15) 100%);
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-        .lux-dest-card:hover .lux-dest-card-img-overlay {
-          opacity: 1;
-        }
-        .lux-dest-card-body {
-          padding: 22px 22px 26px;
-        }
-        .lux-dest-card-name {
-          font-size: 1.15rem;
-          font-weight: 600;
-          color: #fff;
-          margin: 0 0 4px;
-        }
-        .lux-dest-card-country {
-          font-size: 0.9rem;
-          color: #8a8a8a;
-          margin: 0 0 14px;
-        }
-        .lux-dest-card-meta {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-        .lux-dest-card-rating {
-          font-size: 0.85rem;
-          color: #c9a96e;
-          font-weight: 500;
-        }
-        .lux-dest-card-price {
-          font-size: 0.95rem;
-          font-weight: 600;
-          color: #c9a96e;
-        }
-
-        /* ---------- CATEGORIES ---------- */
-        .lux-categories-grid {
-          display: flex;
-          justify-content: center;
-          gap: 20px;
-          flex-wrap: wrap;
-        }
-        .lux-category-card {
-          text-decoration: none;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 14px;
-          padding: 32px 28px;
-          border-radius: 16px;
-          background: #111116;
-          width: 150px;
-          border: 1px solid transparent;
-          transition: border-color 0.3s ease, background 0.3s ease;
-        }
-        .lux-category-card:hover {
-          border-color: rgba(201,169,110,0.4);
-          background: #16161c;
-        }
-        .lux-category-icon {
-          font-size: 2.2rem;
-          transition: filter 0.3s ease;
-        }
-        .lux-category-card:hover .lux-category-icon {
-          filter: drop-shadow(0 0 8px rgba(201,169,110,0.5));
-        }
-        .lux-category-name {
-          font-size: 0.9rem;
-          font-weight: 500;
-          color: #fff;
-          letter-spacing: 0.01em;
-        }
-
-        /* ---------- RECOMMENDED CARDS ---------- */
-        .lux-rec-card {
-          background: #111116;
-          border-radius: 16px;
-          overflow: hidden;
-          border: 1px solid transparent;
-          transition: border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-        .lux-rec-card:hover {
-          border-color: rgba(201,169,110,0.25);
-          box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-        }
-        .lux-rec-card-img-wrap {
-          position: relative;
-          padding-top: 60%;
-          overflow: hidden;
-        }
-        .lux-rec-card-img {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .lux-rec-card:hover .lux-rec-card-img {
-          transform: scale(1.06);
-        }
-        .lux-wishlist-btn {
-          position: absolute;
-          top: 14px;
-          right: 14px;
-          width: 42px;
-          height: 42px;
-          border-radius: 50%;
-          border: none;
-          background: rgba(0,0,0,0.5);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.15rem;
-          color: rgba(255,255,255,0.7);
-          transition: transform 0.2s ease, background 0.3s ease;
-          z-index: 2;
-        }
-        .lux-wishlist-btn:hover {
-          transform: scale(1.1);
-          background: rgba(0,0,0,0.7);
-        }
-        .lux-wishlist-btn--active {
-          color: #c9a96e;
-        }
-        .lux-rec-card-body {
-          padding: 22px 24px 28px;
-        }
-        .lux-rec-card-name {
-          font-size: 1.2rem;
-          font-weight: 600;
-          color: #fff;
-          margin: 0 0 6px;
-        }
-        .lux-rec-card-country {
-          font-size: 0.9rem;
-          color: #8a8a8a;
-          margin: 0 0 14px;
-        }
-        .lux-rec-card-rating-row {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 20px;
-        }
-        .lux-rec-card-rating {
-          font-size: 0.85rem;
-          color: #c9a96e;
-          font-weight: 500;
-        }
-        .lux-rec-card-reviews {
-          font-size: 0.85rem;
-          color: #8a8a8a;
-        }
-        .lux-rec-card-footer {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-        .lux-rec-card-price {
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: #c9a96e;
-        }
-        .lux-rec-card-price-unit {
-          font-size: 0.85rem;
-          font-weight: 400;
-          color: #8a8a8a;
-        }
-        .lux-rec-card-link {
-          font-size: 0.9rem;
-          font-weight: 500;
-          color: #c9a96e;
-          text-decoration: none;
-          transition: opacity 0.2s ease;
-        }
-        .lux-rec-card-link:hover {
-          opacity: 0.7;
-        }
-
-        /* ---------- FEATURE CARDS ---------- */
-        .lux-feature-card {
-          text-align: center;
-          padding: 44px 28px;
-          border-radius: 16px;
-          background: #111116;
-          border: 1px solid transparent;
-          transition: border-color 0.3s ease;
-        }
-        .lux-feature-card:hover {
-          border-color: rgba(201,169,110,0.2);
-        }
-        .lux-feature-icon {
-          font-size: 2.2rem;
-          margin-bottom: 18px;
-          color: #c9a96e;
-        }
-        .lux-feature-title {
-          font-size: 1.05rem;
-          font-weight: 600;
-          color: #fff;
-          margin: 0 0 10px;
-        }
-        .lux-feature-desc {
-          font-size: 0.9rem;
-          color: #8a8a8a;
-          line-height: 1.55;
-          margin: 0;
-        }
-
-        /* ---------- TESTIMONIALS ---------- */
-        .lux-testimonial-card {
-          padding: 40px 34px;
-          border-radius: 16px;
-          background: #111116;
-          border-left: 3px solid #c9a96e;
-        }
-        .lux-testimonial-text {
-          font-size: 1rem;
-          color: #fff;
-          line-height: 1.7;
-          margin: 0 0 28px;
-          font-style: italic;
-          opacity: 0.9;
-        }
-        .lux-testimonial-author {
-          display: flex;
-          align-items: center;
-          gap: 14px;
-        }
-        .lux-testimonial-avatar {
-          width: 46px;
-          height: 46px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, #c9a96e 0%, #a07d3f 100%);
-          color: #0a0a0a;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 0.85rem;
-          font-weight: 700;
-          letter-spacing: 0.03em;
-          flex-shrink: 0;
-        }
-        .lux-testimonial-name {
-          font-size: 0.95rem;
-          font-weight: 600;
-          color: #fff;
-        }
-        .lux-testimonial-role {
-          font-size: 0.85rem;
-          color: #c9a96e;
-          margin-top: 3px;
-        }
-
-        /* ---------- NEWSLETTER ---------- */
-        .lux-newsletter {
-          text-align: center;
-          max-width: 560px;
-          margin: 0 auto;
-          padding: 64px 48px;
-          background: rgba(255,255,255,0.04);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border-radius: 24px;
-          border: 1px solid rgba(255,255,255,0.06);
-        }
-        .lux-newsletter-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.6rem, 3vw, 2.2rem);
-          font-weight: 700;
-          color: #c9a96e;
-          letter-spacing: -0.01em;
-          margin: 0 0 14px;
-        }
-        .lux-newsletter-desc {
-          font-size: 1rem;
-          color: #8a8a8a;
-          line-height: 1.6;
-          margin: 0 0 36px;
-        }
-        .lux-newsletter-form {
-          display: flex;
-          max-width: 440px;
-          margin: 0 auto;
-          border-radius: 100px;
-          overflow: hidden;
-          border: 1px solid rgba(255,255,255,0.1);
-          transition: border-color 0.3s ease;
-        }
-        .lux-newsletter-form:focus-within {
-          border-color: #c9a96e;
-        }
-        .lux-newsletter-input {
-          flex: 1;
-          border: none;
-          outline: none;
-          padding: 16px 24px;
-          font-size: 0.95rem;
-          color: #fff;
-          background: rgba(255,255,255,0.05);
-          font-family: inherit;
-        }
-        .lux-newsletter-input::placeholder {
-          color: rgba(255,255,255,0.35);
-        }
-        .lux-newsletter-btn {
-          border: none;
-          background: #c9a96e;
-          color: #0a0a0a;
-          padding: 16px 28px;
-          font-size: 0.9rem;
-          font-weight: 600;
-          cursor: pointer;
-          white-space: nowrap;
-          font-family: inherit;
-          transition: background 0.3s ease;
-        }
-        .lux-newsletter-btn:hover {
-          background: #d4b87a;
-        }
-
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 1024px) {
-          .lux-grid-4 {
-            grid-template-columns: repeat(2, 1fr);
-          }
-          .lux-grid-3 {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (max-width: 640px) {
-          .lux-grid-4,
-          .lux-grid-3 {
-            grid-template-columns: 1fr;
-          }
-          .lux-section {
-            padding: 80px 16px;
-          }
-          .lux-hero-content {
-            padding: 0 16px;
-          }
-          .lux-newsletter {
-            padding: 48px 24px;
-          }
-          .lux-newsletter-form {
-            flex-direction: column;
-            border-radius: 16px;
-          }
-          .lux-newsletter-input {
-            border-radius: 0;
-          }
-          .lux-newsletter-btn {
-            padding: 16px;
-          }
-          .lux-hero-search {
-            flex-direction: column;
-            border-radius: 16px;
-          }
-          .lux-hero-btn {
-            border-radius: 0;
-          }
-          .lux-category-card {
-            width: 120px;
-            padding: 24px 18px;
-          }
-        }
-
-        /* ========== LIGHT THEME ========== */
-        [data-theme="light"] .lux-loading {
-          background: #ffffff;
-        }
-        [data-theme="light"] .lux-section {
-          background: #ffffff;
-        }
-        [data-theme="light"] .lux-section:nth-child(even) {
-          background: #f8f6f1;
-        }
-        [data-theme="light"] .lux-section-label { color: #8b6914; }
-        [data-theme="light"] .lux-gold-line { background: #8b6914; }
-        [data-theme="light"] .lux-section-title { color: #171717; }
-        [data-theme="light"] .lux-section-subtitle { color: #737373; }
-        [data-theme="light"] .lux-dest-name { color: #171717; }
-        [data-theme="light"] .lux-dest-meta { color: #737373; }
-        [data-theme="light"] .lux-category-card {
-          background: #ffffff;
-          border-color: #e5e5e5;
-        }
-        [data-theme="light"] .lux-category-card:hover {
-          border-color: rgba(139, 105, 20, 0.3);
-        }
-        [data-theme="light"] .lux-category-label { color: #262626; }
-        [data-theme="light"] .lux-reco-card {
-          background: #ffffff;
-          border-color: #e5e5e5;
-        }
-        [data-theme="light"] .lux-reco-name { color: #171717; }
-        [data-theme="light"] .lux-reco-loc { color: #737373; }
-        [data-theme="light"] .lux-reco-price { color: #8b6914; }
-        [data-theme="light"] .lux-feature-card {
-          background: #ffffff;
-          border-color: #e5e5e5;
-        }
-        [data-theme="light"] .lux-feature-title { color: #171717; }
-        [data-theme="light"] .lux-feature-desc { color: #737373; }
-        [data-theme="light"] .lux-testi-card {
-          background: #ffffff;
-          border-color: #e5e5e5;
-          border-left-color: #8b6914;
-        }
-        [data-theme="light"] .lux-testi-text { color: #404040; }
-        [data-theme="light"] .lux-testi-name { color: #171717; }
-        [data-theme="light"] .lux-testi-role { color: #737373; }
-        [data-theme="light"] .lux-newsletter-card {
-          background: rgba(248, 246, 241, 0.9);
-          border-color: #e5e5e5;
-        }
-        [data-theme="light"] .lux-newsletter-title { color: #8b6914; }
-        [data-theme="light"] .lux-newsletter-desc { color: #525252; }
-        [data-theme="light"] .lux-newsletter-input {
-          background: #ffffff;
-          border-color: #e5e5e5;
-          color: #262626;
-        }
-        [data-theme="light"] .lux-hero-search {
-          background: rgba(255, 255, 255, 0.9);
-          border-color: rgba(139, 105, 20, 0.15);
-        }
-        [data-theme="light"] .lux-hero-select,
-        [data-theme="light"] .lux-hero-input {
-          color: #262626;
-        }
-      `}</style>
     </>
   )
 }
+
+const styles = `
+  /* ===== BASE ===== */
+  .hp-section {
+    padding: 96px 24px;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-bg-white { background: #ffffff; }
+  .hp-bg-gray { background: #f9fafb; }
+  .hp-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hp-section-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #6b7280;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-section-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 48px 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .hp-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .hp-reveal.hp-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== HERO ===== */
+  .hp-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .hp-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+  }
+  .hp-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 680px;
+    padding: 0 24px;
+  }
+  .hp-hero-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-hero-heading {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-hero-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 40px 0;
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-search-bar {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    padding: 6px;
+    gap: 4px;
+  }
+  .hp-search-select,
+  .hp-search-date {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    color: #374151;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    min-width: 0;
+  }
+  .hp-search-select {
+    border-right: 1px solid #e5e7eb;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 36px;
+  }
+  .hp-search-date {
+    border-right: 1px solid #e5e7eb;
+  }
+  .hp-search-btn {
+    padding: 14px 32px;
+    background: #0f766e;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+  .hp-search-btn:hover {
+    background: #0d6359;
+  }
+
+  /* ===== GRIDS ===== */
+  .hp-grid {
+    display: grid;
+    gap: 24px;
+  }
+  .hp-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .hp-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+  /* ===== DESTINATION CARDS ===== */
+  .hp-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .hp-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+  .hp-card-img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .hp-card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+  .hp-card-body {
+    padding: 20px;
+  }
+  .hp-card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 4px 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-card-country {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0 0 12px 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-card-rating {
+    color: #374151;
+    font-weight: 500;
+  }
+  .hp-card-price {
+    color: #0f766e;
+    font-weight: 600;
+  }
+  .hp-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* ===== WISHLIST BUTTON ===== */
+  .hp-wish-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 2;
+  }
+  .hp-wish-btn:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transform: scale(1.1);
+  }
+  .hp-wish-btn.hp-wish-active {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  /* ===== CATEGORIES ===== */
+  .hp-categories-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hp-cat-card {
+    flex: 1 1 0;
+    min-width: 140px;
+    padding: 24px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+  .hp-cat-card:hover {
+    border-color: #0f766e;
+    box-shadow: 0 4px 12px rgba(15, 118, 110, 0.1);
+  }
+  .hp-cat-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ===== FEATURE CARDS ===== */
+  .hp-feature-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 32px 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+  .hp-feature-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #0f766e;
+    margin-bottom: 20px;
+  }
+  .hp-feature-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 8px 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-feature-desc {
+    font-size: 0.9rem;
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ===== TESTIMONIAL CARDS ===== */
+  .hp-testimonial-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid #0f766e;
+    border-radius: 12px;
+    padding: 32px 28px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+  .hp-testimonial-text {
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.7;
+    margin: 0 0 24px 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .hp-testimonial-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-testimonial-role {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ===== NEWSLETTER ===== */
+  .hp-newsletter-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 56px 48px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+  .hp-newsletter-heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-newsletter-subtitle {
+    font-size: 1rem;
+    color: #6b7280;
+    margin: 0 0 32px 0;
+    font-family: 'Inter', sans-serif;
+  }
+  .hp-newsletter-form {
+    display: flex;
+    gap: 8px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .hp-newsletter-input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #374151;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s ease;
+  }
+  .hp-newsletter-input:focus {
+    border-color: #0f766e;
+  }
+  .hp-newsletter-btn {
+    padding: 14px 28px;
+    background: #0f766e;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+  .hp-newsletter-btn:hover {
+    background: #0d6359;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .hp-grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .hp-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .hp-grid-4 { grid-template-columns: 1fr; }
+    .hp-grid-3 { grid-template-columns: 1fr; }
+    .hp-section { padding: 64px 16px; }
+    .hp-section-heading { font-size: 1.5rem; margin-bottom: 32px; }
+    .hp-search-bar {
+      flex-direction: column;
+      padding: 8px;
+    }
+    .hp-search-select,
+    .hp-search-date {
+      border-right: none;
+      border-bottom: 1px solid #e5e7eb;
+      width: 100%;
+    }
+    .hp-search-btn {
+      width: 100%;
+    }
+    .hp-categories-row {
+      flex-direction: column;
+    }
+    .hp-cat-card {
+      min-width: unset;
+    }
+    .hp-newsletter-card {
+      padding: 40px 24px;
+    }
+    .hp-newsletter-form {
+      flex-direction: column;
+    }
+    .hp-newsletter-btn {
+      width: 100%;
+    }
+  }
+
+  /* ===== DARK THEME ===== */
+  [data-theme="dark"] .hp-bg-white { background: #0f1115; }
+  [data-theme="dark"] .hp-bg-gray { background: #161920; }
+  [data-theme="dark"] .hp-section-heading { color: #f5f6f8; }
+  [data-theme="dark"] .hp-section-label { color: #a0a3ab; }
+
+  [data-theme="dark"] .hp-card {
+    background: #1a1d24;
+    border-color: #2a2d35;
+  }
+  [data-theme="dark"] .hp-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+  [data-theme="dark"] .hp-card-title { color: #f5f6f8; }
+  [data-theme="dark"] .hp-card-country { color: #a0a3ab; }
+  [data-theme="dark"] .hp-card-rating { color: #a0a3ab; }
+
+  [data-theme="dark"] .hp-cat-card {
+    background: #1a1d24;
+    border-color: #2a2d35;
+  }
+  [data-theme="dark"] .hp-cat-card:hover {
+    border-color: #0f766e;
+    box-shadow: 0 4px 12px rgba(15, 118, 110, 0.15);
+  }
+  [data-theme="dark"] .hp-cat-name { color: #f5f6f8; }
+
+  [data-theme="dark"] .hp-feature-card {
+    background: #1a1d24;
+    border-color: #2a2d35;
+  }
+  [data-theme="dark"] .hp-feature-title { color: #f5f6f8; }
+  [data-theme="dark"] .hp-feature-desc { color: #a0a3ab; }
+
+  [data-theme="dark"] .hp-testimonial-card {
+    background: #1a1d24;
+    border-color: #2a2d35;
+    border-left-color: #0f766e;
+  }
+  [data-theme="dark"] .hp-testimonial-text { color: #a0a3ab; }
+  [data-theme="dark"] .hp-testimonial-name { color: #f5f6f8; }
+  [data-theme="dark"] .hp-testimonial-role { color: #6b7280; }
+
+  [data-theme="dark"] .hp-newsletter-card {
+    background: #1a1d24;
+    border-color: #2a2d35;
+  }
+  [data-theme="dark"] .hp-newsletter-heading { color: #f5f6f8; }
+  [data-theme="dark"] .hp-newsletter-subtitle { color: #a0a3ab; }
+  [data-theme="dark"] .hp-newsletter-input {
+    background: #0f1115;
+    border-color: #2a2d35;
+    color: #f5f6f8;
+  }
+  [data-theme="dark"] .hp-newsletter-input:focus {
+    border-color: #0f766e;
+  }
+
+  [data-theme="dark"] .hp-search-bar {
+    background: #1a1d24;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+  [data-theme="dark"] .hp-search-select,
+  [data-theme="dark"] .hp-search-date {
+    color: #a0a3ab;
+    border-color: #2a2d35;
+  }
+  [data-theme="dark"] .hp-search-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0a3ab' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  }
+
+  [data-theme="dark"] .hp-wish-btn {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  [data-theme="dark"] .hp-wish-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  [data-theme="dark"] .hp-wish-btn.hp-wish-active {
+    background: rgba(30, 33, 40, 0.95);
+  }
+`

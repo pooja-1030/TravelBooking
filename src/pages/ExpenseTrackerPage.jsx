@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
 
 const CATEGORIES = [
-  { key: 'hotels', label: 'Hotels', icon: '\u{1F3E8}', color: '#4a90d9' },
-  { key: 'food', label: 'Food & Dining', icon: '\u{1F37D}\uFE0F', color: '#e8943a' },
-  { key: 'transport', label: 'Transport', icon: '\u{1F697}', color: '#4caf50' },
-  { key: 'activities', label: 'Activities', icon: '\u{1F3AF}', color: '#9c27b0' },
-  { key: 'shopping', label: 'Shopping', icon: '\u{1F6CD}\uFE0F', color: '#e91e8a' },
-  { key: 'other', label: 'Other', icon: '\u{1F4F1}', color: '#888888' },
+  { key: 'hotels', label: 'Hotels', icon: '', color: '#4a90d9' },
+  { key: 'food', label: 'Food & Dining', icon: '', color: '#e8943a' },
+  { key: 'transport', label: 'Transport', icon: '', color: '#4caf50' },
+  { key: 'activities', label: 'Activities', icon: '', color: '#9c27b0' },
+  { key: 'shopping', label: 'Shopping', icon: '', color: '#e91e8a' },
+  { key: 'other', label: 'Other', icon: '', color: '#888888' },
 ];
 
 const SAMPLE_TRIPS = [

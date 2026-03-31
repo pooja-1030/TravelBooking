@@ -172,7 +172,7 @@ export default function ItineraryPlannerPage() {
         .activity { padding: 4px 0; }
         .footer { margin-top: 40px; color: #94a3b8; font-size: 12px; }
       </style></head><body>
-        <h1>\u2708 ${aiResult?.destination || 'Custom'} Itinerary</h1>
+        <h1>${aiResult?.destination || 'Custom'} Itinerary</h1>
         <p>${aiResult?.summary || ''}</p>
         <div class="summary">
           <strong>Hotel:</strong> ${aiResult?.hotel || 'TBD'} |
@@ -220,7 +220,7 @@ export default function ItineraryPlannerPage() {
           <form onSubmit={handleAISubmit} className="planner-ai-form">
             <div className="planner-ai-input-wrap">
               <div className="planner-ai-input-row">
-                <span className="planner-ai-icon">{'\u2728'}</span>
+                <span className="planner-ai-icon">{'*'}</span>
                 <textarea
                   value={aiPrompt}
                   onChange={e => setAiPrompt(e.target.value)}
@@ -263,32 +263,32 @@ export default function ItineraryPlannerPage() {
             <div className="planner-summary">
               <div className="planner-summary-header">
                 <div>
-                  <h2>{'\u2708\ufe0f'} {aiResult.destination} Trip Plan</h2>
+                  <h2>{aiResult.destination} Trip Plan</h2>
                   <p>{aiResult.summary}</p>
                 </div>
                 <div className="planner-summary-actions">
-                  <button className="btn btn-outline btn-sm" onClick={handlePrint}>{'\ud83d\udcc4'} Export PDF</button>
-                  <button className="btn btn-primary btn-sm" onClick={handleSave}>{'\ud83d\udcbe'} Save</button>
+                  <button className="btn btn-outline btn-sm" onClick={handlePrint}>Export PDF</button>
+                  <button className="btn btn-primary btn-sm" onClick={handleSave}>Save</button>
                   <button className={`btn btn-outline btn-sm${editMode ? ' active' : ''}`} onClick={() => setEditMode(!editMode)}>
-                    {editMode ? '\u2705 Done' : '\u270f\ufe0f Edit'}
+                    {editMode ? 'Done' : 'Edit'}
                   </button>
                 </div>
               </div>
               <div className="planner-summary-stats">
                 <div className="planner-stat">
-                  <div className="planner-stat-icon">{'\ud83d\udcc5'}</div>
+                  <div className="planner-stat-icon">Days</div>
                   <div><strong>{itineraryDays.length} Days</strong></div>
                 </div>
                 <div className="planner-stat">
-                  <div className="planner-stat-icon">{'\ud83c\udfe8'}</div>
+                  <div className="planner-stat-icon">Hotel</div>
                   <div><strong>{aiResult.hotel}</strong></div>
                 </div>
                 <div className="planner-stat">
-                  <div className="planner-stat-icon">{'\ud83d\udcb0'}</div>
+                  <div className="planner-stat-icon">Cost</div>
                   <div><strong>{convertPrice(aiResult.totalEstimate)}</strong><small>estimated</small></div>
                 </div>
                 <div className="planner-stat">
-                  <div className="planner-stat-icon">{'\ud83c\udf1f'}</div>
+                  <div className="planner-stat-icon">Level</div>
                   <div><strong>{aiResult.budget}</strong><small>budget level</small></div>
                 </div>
               </div>
@@ -296,7 +296,7 @@ export default function ItineraryPlannerPage() {
 
             {/* Timeline */}
             <div className="planner-timeline">
-              <h3>{'\ud83d\uddd3\ufe0f'} Day-by-Day Itinerary {editMode && <small>(drag to reorder)</small>}</h3>
+              <h3>Day-by-Day Itinerary {editMode && <small>(drag to reorder)</small>}</h3>
               {itineraryDays.map((day, dayIdx) => (
                 <div key={dayIdx} className="planner-day">
                   <div className="planner-day-marker">
@@ -333,7 +333,7 @@ export default function ItineraryPlannerPage() {
             {/* Packing Assistant */}
             <div className="planner-packing-section">
               <button className="planner-packing-toggle" onClick={() => setShowPacking(!showPacking)}>
-                <span>{'\ud83e\uddf3'} Packing Assistant</span>
+                <span>Packing Assistant</span>
                 <span className={`planner-packing-arrow${showPacking ? ' open' : ''}`}>{'\u276f'}</span>
               </button>
               {showPacking && (
@@ -358,31 +358,31 @@ export default function ItineraryPlannerPage() {
 
             {/* Emergency & Safety */}
             <div className="planner-emergency">
-              <h3>{'\ud83c\udd98'} Emergency & Safety Info</h3>
+              <h3>Emergency & Safety Info</h3>
               <div className="planner-emergency-grid">
                 <div className="planner-emergency-card">
-                  <div className="planner-emergency-icon">{'\ud83c\udfe5'}</div>
+                  <div className="planner-emergency-icon">+</div>
                   <div>
                     <h4>Nearest Hospitals</h4>
                     <p>International SOS Clinic, {aiResult.destination} General Hospital</p>
                   </div>
                 </div>
                 <div className="planner-emergency-card">
-                  <div className="planner-emergency-icon">{'\ud83d\udcde'}</div>
+                  <div className="planner-emergency-icon">Tel</div>
                   <div>
                     <h4>Emergency Contacts</h4>
                     <p>Police: 911 | Ambulance: 112 | Embassy Hotline</p>
                   </div>
                 </div>
                 <div className="planner-emergency-card">
-                  <div className="planner-emergency-icon">{'\ud83d\udee1\ufe0f'}</div>
+                  <div className="planner-emergency-icon">Safety</div>
                   <div>
                     <h4>Safety Tips</h4>
                     <p>Keep copies of documents, register with embassy, get travel insurance</p>
                   </div>
                 </div>
                 <div className="planner-emergency-card">
-                  <div className="planner-emergency-icon">{'\ud83d\udcb3'}</div>
+                  <div className="planner-emergency-icon">Card</div>
                   <div>
                     <h4>Travel Insurance</h4>
                     <p>Recommended: comprehensive coverage for medical & cancellation</p>
@@ -394,7 +394,7 @@ export default function ItineraryPlannerPage() {
             {/* View City Link */}
             <div className="planner-city-link">
               <Link to={`/city/${aiResult.cityId}`} className="btn btn-primary btn-lg">
-                {'\ud83c\udf0d'} Explore {aiResult.destination} Details
+                Explore {aiResult.destination} Details
               </Link>
             </div>
           </div>
@@ -404,29 +404,29 @@ export default function ItineraryPlannerPage() {
         {!aiResult && !aiLoading && (
           <div className="planner-empty">
             <div className="planner-empty-visual">
-              <div className="planner-empty-globe">{'\ud83c\udf0d'}</div>
+              <div className="planner-empty-globe">Globe</div>
               <div className="planner-empty-ring" />
             </div>
             <h2>Your Adventure Awaits</h2>
             <p>Describe your dream vacation above and our AI will generate a complete day-by-day itinerary with hotel suggestions, cost estimates, and packing lists.</p>
             <div className="planner-features-grid">
               <div className="planner-feature">
-                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>{'\ud83e\udde0'}</div>
+                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)' }}>AI</div>
                 <h4>AI-Powered Planning</h4>
                 <p>Smart itinerary generation tailored to your preferences and budget</p>
               </div>
               <div className="planner-feature">
-                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #0ea5e9, #06b6d4)' }}>{'\ud83d\udd04'}</div>
+                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #0ea5e9, #06b6d4)' }}>Edit</div>
                 <h4>Drag & Drop Editor</h4>
                 <p>Customize your schedule with intuitive drag and drop controls</p>
               </div>
               <div className="planner-feature">
-                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #f59e0b, #f97316)' }}>{'\ud83d\udcc4'}</div>
+                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #f59e0b, #f97316)' }}>PDF</div>
                 <h4>PDF Export</h4>
                 <p>Download your itinerary and access it offline anywhere</p>
               </div>
               <div className="planner-feature">
-                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #10b981, #14b8a6)' }}>{'\ud83e\uddf3'}</div>
+                <div className="planner-feature-icon-wrap" style={{ background: 'linear-gradient(135deg, #10b981, #14b8a6)' }}>Pack</div>
                 <h4>Packing Assistant</h4>
                 <p>Never forget essentials with smart packing checklists</p>
               </div>
@@ -455,7 +455,7 @@ export default function ItineraryPlannerPage() {
       {/* Save Toast */}
       {savedToast && (
         <div className="booking-toast">
-          {'\u2705'} Itinerary saved! <Link to="/dashboard">View in Dashboard</Link>
+          Itinerary saved! <Link to="/dashboard">View in Dashboard</Link>
         </div>
       )}
     </div>

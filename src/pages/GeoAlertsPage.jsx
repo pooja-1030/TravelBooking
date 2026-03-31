@@ -15,22 +15,22 @@ const GeoAlertsPage = () => {
   const [toastVisible, setToastVisible] = useState(false);
 
   const categoryIcons = {
-    Attractions: '🏛️',
-    Restaurants: '🍽️',
-    Deals: '🏷️',
-    Events: '🎭',
-    'Historical Sites': '🏰',
+    Attractions: '',
+    Restaurants: '',
+    Deals: '',
+    Events: '',
+    'Historical Sites': '',
   };
 
   const nearbyAlerts = [
-    { icon: '🗼', name: 'Eiffel Tower', distance: '0.3 km away', type: 'Attraction', typeColor: '#c9a96e' },
-    { icon: '☕', name: 'Le Petit Cafe', distance: '150 m away', type: 'Restaurant', typeColor: '#22c55e' },
-    { icon: '🏷️', name: '50% off Seine Cruise', distance: '0.8 km away', type: 'Deal', typeColor: '#f97316' },
-    { icon: '🎨', name: 'Musee d\'Orsay', distance: '1.2 km away', type: 'Attraction', typeColor: '#c9a96e' },
-    { icon: '🍷', name: 'Chez Laurent Bistro', distance: '0.5 km away', type: 'Restaurant', typeColor: '#22c55e' },
-    { icon: '🎭', name: 'Live Jazz at Blue Note', distance: '0.9 km away', type: 'Event', typeColor: '#8b5cf6' },
-    { icon: '🏰', name: 'Conciergerie', distance: '1.5 km away', type: 'Historical Site', typeColor: '#eab308' },
-    { icon: '🛍️', name: '30% off Galeries Lafayette', distance: '2.1 km away', type: 'Deal', typeColor: '#f97316' },
+    { icon: '', name: 'Eiffel Tower', distance: '0.3 km away', type: 'Attraction', typeColor: '#c9a96e' },
+    { icon: '', name: 'Le Petit Cafe', distance: '150 m away', type: 'Restaurant', typeColor: '#22c55e' },
+    { icon: '', name: '50% off Seine Cruise', distance: '0.8 km away', type: 'Deal', typeColor: '#f97316' },
+    { icon: '', name: 'Musee d\'Orsay', distance: '1.2 km away', type: 'Attraction', typeColor: '#c9a96e' },
+    { icon: '', name: 'Chez Laurent Bistro', distance: '0.5 km away', type: 'Restaurant', typeColor: '#22c55e' },
+    { icon: '', name: 'Live Jazz at Blue Note', distance: '0.9 km away', type: 'Event', typeColor: '#8b5cf6' },
+    { icon: '', name: 'Conciergerie', distance: '1.5 km away', type: 'Historical Site', typeColor: '#eab308' },
+    { icon: '', name: '30% off Galeries Lafayette', distance: '2.1 km away', type: 'Deal', typeColor: '#f97316' },
   ];
 
   const alertHistory = [
@@ -42,11 +42,11 @@ const GeoAlertsPage = () => {
   ];
 
   const toastAlerts = [
-    { icon: '🎪', name: 'Circus Festival at Tuileries', distance: '0.4 km', type: 'Event' },
-    { icon: '🥐', name: 'Boulangerie Paul - Fresh Croissants', distance: '200 m', type: 'Restaurant' },
-    { icon: '🏷️', name: '40% off Louvre Night Tour', distance: '1.1 km', type: 'Deal' },
-    { icon: '🗿', name: 'Rodin Museum', distance: '0.6 km', type: 'Attraction' },
-    { icon: '🍕', name: 'Pizzeria da Marco - Lunch Special', distance: '300 m', type: 'Restaurant' },
+    { icon: '', name: 'Circus Festival at Tuileries', distance: '0.4 km', type: 'Event' },
+    { icon: '', name: 'Boulangerie Paul - Fresh Croissants', distance: '200 m', type: 'Restaurant' },
+    { icon: '', name: '40% off Louvre Night Tour', distance: '1.1 km', type: 'Deal' },
+    { icon: '', name: 'Rodin Museum', distance: '0.6 km', type: 'Attraction' },
+    { icon: '', name: 'Pizzeria da Marco - Lunch Special', distance: '300 m', type: 'Restaurant' },
   ];
 
   const toggleCategory = (cat) => {

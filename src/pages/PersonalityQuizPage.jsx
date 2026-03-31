@@ -8,80 +8,80 @@ const QUESTIONS = [
     id: 1,
     question: "What's your ideal vacation budget?",
     options: [
-      { label: 'Budget', icon: '💰', value: 'budget' },
-      { label: 'Moderate', icon: '💵', value: 'moderate' },
-      { label: 'Luxury', icon: '💎', value: 'luxury' },
-      { label: 'No Limit', icon: '🏦', value: 'nolimit' },
+      { label: 'Budget', icon: '', value: 'budget' },
+      { label: 'Moderate', icon: '', value: 'moderate' },
+      { label: 'Luxury', icon: '', value: 'luxury' },
+      { label: 'No Limit', icon: '', value: 'nolimit' },
     ],
   },
   {
     id: 2,
     question: 'Pick your dream climate',
     options: [
-      { label: 'Tropical', icon: '🌴', value: 'tropical' },
-      { label: 'Mediterranean', icon: '🌊', value: 'mediterranean' },
-      { label: 'Cold & Snowy', icon: '❄️', value: 'cold' },
-      { label: 'Desert', icon: '🏜️', value: 'desert' },
+      { label: 'Tropical', icon: '', value: 'tropical' },
+      { label: 'Mediterranean', icon: '', value: 'mediterranean' },
+      { label: 'Cold & Snowy', icon: '', value: 'cold' },
+      { label: 'Desert', icon: '', value: 'desert' },
     ],
   },
   {
     id: 3,
     question: 'What excites you most?',
     options: [
-      { label: 'Ancient ruins', icon: '🏛️', value: 'ruins' },
-      { label: 'Local food', icon: '🍜', value: 'food' },
-      { label: 'Nature hikes', icon: '🥾', value: 'nature' },
-      { label: 'Nightlife', icon: '🎶', value: 'nightlife' },
+      { label: 'Ancient ruins', icon: '', value: 'ruins' },
+      { label: 'Local food', icon: '', value: 'food' },
+      { label: 'Nature hikes', icon: '', value: 'nature' },
+      { label: 'Nightlife', icon: '', value: 'nightlife' },
     ],
   },
   {
     id: 4,
     question: 'Your travel style?',
     options: [
-      { label: 'Solo wanderer', icon: '🚶', value: 'solo' },
-      { label: 'Couple getaway', icon: '💑', value: 'couple' },
-      { label: 'Family fun', icon: '👨‍👩‍👧‍👦', value: 'family' },
-      { label: 'Group adventure', icon: '🎉', value: 'group' },
+      { label: 'Solo wanderer', icon: '', value: 'solo' },
+      { label: 'Couple getaway', icon: '', value: 'couple' },
+      { label: 'Family fun', icon: '', value: 'family' },
+      { label: 'Group adventure', icon: '', value: 'group' },
     ],
   },
   {
     id: 5,
     question: 'How do you recharge?',
     options: [
-      { label: 'Beach & ocean', icon: '🏖️', value: 'beach' },
-      { label: 'Mountain views', icon: '🏔️', value: 'mountain' },
-      { label: 'City buzz', icon: '🏙️', value: 'city' },
-      { label: 'Spa & wellness', icon: '🧖', value: 'spa' },
+      { label: 'Beach & ocean', icon: '', value: 'beach' },
+      { label: 'Mountain views', icon: '', value: 'mountain' },
+      { label: 'City buzz', icon: '', value: 'city' },
+      { label: 'Spa & wellness', icon: '', value: 'spa' },
     ],
   },
   {
     id: 6,
     question: 'Your must-have?',
     options: [
-      { label: 'Great WiFi', icon: '📶', value: 'wifi' },
-      { label: 'Amazing food', icon: '🍽️', value: 'amazingfood' },
-      { label: 'Beautiful nature', icon: '🌿', value: 'beautifulnature' },
-      { label: 'Cultural experiences', icon: '🎭', value: 'cultural' },
+      { label: 'Great WiFi', icon: '', value: 'wifi' },
+      { label: 'Amazing food', icon: '', value: 'amazingfood' },
+      { label: 'Beautiful nature', icon: '', value: 'beautifulnature' },
+      { label: 'Cultural experiences', icon: '', value: 'cultural' },
     ],
   },
   {
     id: 7,
     question: 'Preferred trip length?',
     options: [
-      { label: 'Weekend escape', icon: '⚡', value: 'weekend' },
-      { label: '1 week', icon: '📅', value: 'oneweek' },
-      { label: '2 weeks', icon: '🗓️', value: 'twoweeks' },
-      { label: 'Month+', icon: '🌍', value: 'month' },
+      { label: 'Weekend escape', icon: '', value: 'weekend' },
+      { label: '1 week', icon: '', value: 'oneweek' },
+      { label: '2 weeks', icon: '', value: 'twoweeks' },
+      { label: 'Month+', icon: '', value: 'month' },
     ],
   },
   {
     id: 8,
     question: 'Pick an activity',
     options: [
-      { label: 'Scuba diving', icon: '🤿', value: 'scuba' },
-      { label: 'Museum hopping', icon: '🏛️', value: 'museum' },
-      { label: 'Street food tour', icon: '🥘', value: 'streetfood' },
-      { label: 'Yoga retreat', icon: '🧘', value: 'yoga' },
+      { label: 'Scuba diving', icon: '', value: 'scuba' },
+      { label: 'Museum hopping', icon: '', value: 'museum' },
+      { label: 'Street food tour', icon: '', value: 'streetfood' },
+      { label: 'Yoga retreat', icon: '', value: 'yoga' },
     ],
   },
 ]
@@ -89,7 +89,7 @@ const QUESTIONS = [
 const PERSONALITIES = {
   adventure: {
     title: 'The Adventure Explorer',
-    icon: '🧭',
+    icon: '',
     description:
       'You crave the thrill of the unknown. From scaling mountain peaks to diving into crystal-clear waters, your wanderlust knows no bounds. You feel most alive when pushing boundaries and discovering hidden gems off the beaten path.',
     tags: ['nature', 'scuba', 'mountain', 'beautifulnature'],
@@ -97,7 +97,7 @@ const PERSONALITIES = {
   },
   culture: {
     title: 'The Culture Connoisseur',
-    icon: '🎭',
+    icon: '',
     description:
       'History, art, and tradition light up your soul. You seek out ancient temples, world-class museums, and authentic cultural encounters that broaden your perspective and deepen your understanding of the world.',
     tags: ['ruins', 'museum', 'cultural'],
@@ -105,7 +105,7 @@ const PERSONALITIES = {
   },
   luxury: {
     title: 'The Luxury Voyager',
-    icon: '✨',
+    icon: '',
     description:
       'Only the finest will do. You appreciate the art of indulgence — from five-star resorts to private beach villas. Every trip is a curated experience of elegance, comfort, and world-class service.',
     tags: ['luxury', 'nolimit', 'spa', 'couple'],
@@ -113,7 +113,7 @@ const PERSONALITIES = {
   },
   urban: {
     title: 'The Urban Nomad',
-    icon: '🌃',
+    icon: '',
     description:
       'Skylines, street art, rooftop bars, and the electric energy of a metropolis — that is your element. You thrive in bustling cities, chasing the pulse of urban life and discovering what makes each city unique.',
     tags: ['nightlife', 'city', 'wifi', 'weekend'],
@@ -121,7 +121,7 @@ const PERSONALITIES = {
   },
   zen: {
     title: 'The Zen Traveler',
-    icon: '🧘',
+    icon: '',
     description:
       'Travel is your sanctuary. You seek places that restore your spirit — serene beaches, peaceful retreats, and mindful experiences. You return from every trip feeling renewed, grounded, and inspired.',
     tags: ['yoga', 'beach', 'spa', 'beautifulnature'],

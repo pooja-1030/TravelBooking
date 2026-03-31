@@ -31,7 +31,7 @@ function loadJSON(key, fallback) {
 
 export function AppProvider({ children }) {
   /* ── Theme ── */
-  const [theme, setTheme] = useState(() => localStorage.getItem('wl-theme') || 'dark')
+  const [theme, setTheme] = useState(() => localStorage.getItem('wl-theme') || 'light')
   const toggleTheme = () => setTheme(t => t === 'light' ? 'dark' : 'light')
 
   /* ── Auth ── */

@@ -75,7 +75,7 @@ export default function GroupTripPage() {
       {/* Hero */}
       <div className="group-hero">
         <div className="container">
-          <h1>{'\ud83e\uddd1\u200d\ud83e\udd1d\u200d\ud83e\uddd1'} Group Trip Planner</h1>
+          <h1>Group Trip Planner</h1>
           <p>Plan trips together, vote on destinations, and split expenses with friends</p>
         </div>
       </div>
@@ -91,7 +91,7 @@ export default function GroupTripPage() {
 
             {groupTrips.length === 0 ? (
               <div className="group-empty">
-                <span>{'\ud83c\udf0d'}</span>
+                <span></span>
                 <h3>No group trips yet</h3>
                 <p>Create a group trip and invite your friends to start planning together!</p>
                 <button className="btn btn-primary" onClick={() => setStep('create')}>Create Your First Group Trip</button>
@@ -123,7 +123,7 @@ export default function GroupTripPage() {
           <div className="group-create">
             <button className="btn btn-outline btn-sm" onClick={() => setStep('list')}>{'\u2190'} Back</button>
             <div className="group-create-card">
-              <h2>{'\u2728'} Create a New Group Trip</h2>
+              <h2>Create a New Group Trip</h2>
               <form onSubmit={handleCreateTrip}>
                 <div className="auth-field">
                   <label>Trip Name</label>
@@ -147,13 +147,13 @@ export default function GroupTripPage() {
               </div>
               <div className="group-invite-section">
                 <input type="text" value={inviteLink || `https://wanderlust.app/group/${selectedTrip.id}`} readOnly className="group-invite-input" />
-                <button className="btn btn-primary btn-sm" onClick={copyLink}>{'\ud83d\udccb'} Copy Link</button>
+                <button className="btn btn-primary btn-sm" onClick={copyLink}>Copy Link</button>
               </div>
             </div>
 
             {/* Members */}
             <div className="group-section">
-              <h3>{'\ud83d\udc65'} Members</h3>
+              <h3>Members</h3>
               <div className="group-members-grid">
                 {(selectedTrip.members || MOCK_MEMBERS).map((m, i) => (
                   <div key={i} className="group-member-card">
@@ -167,7 +167,7 @@ export default function GroupTripPage() {
 
             {/* Destination Voting */}
             <div className="group-section">
-              <h3>{'\ud83d\uddf3\ufe0f'} Vote on Destination</h3>
+              <h3>Vote on Destination</h3>
               <p>Select your preferred destinations. Most votes wins!</p>
               <div className="group-vote-grid">
                 {(selectedTrip.destinations || []).map(dest => {
@@ -183,7 +183,7 @@ export default function GroupTripPage() {
                           <span>vote{(dest.votes?.length || 0) !== 1 ? 's' : ''}</span>
                         </div>
                         <span className={`group-vote-btn${voted ? ' active' : ''}`}>
-                          {voted ? '\u2705 Voted' : '\ud83d\uddf3\ufe0f Vote'}
+                          {voted ? 'Voted' : 'Vote'}
                         </span>
                       </div>
                     </div>
@@ -195,7 +195,7 @@ export default function GroupTripPage() {
             {/* Expense Splitting */}
             <div className="group-section">
               <div className="group-section-header">
-                <h3>{'\ud83d\udcb0'} Expense Splitting</h3>
+                <h3>Expense Splitting</h3>
                 <button className="btn btn-outline btn-sm" onClick={() => setShowExpenses(!showExpenses)}>
                   {showExpenses ? 'Hide' : 'Show'} Details
                 </button>

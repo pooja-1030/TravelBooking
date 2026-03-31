@@ -4,22 +4,22 @@ import { Link } from 'react-router-dom';
 const CATEGORIES = ['All', 'Luggage', 'Electronics', 'Accessories', 'Clothing', 'Safety', 'Comfort'];
 
 const PRODUCTS = [
-  { id: 1, name: 'Travel Backpack', brand: 'Nomatic', price: 149.99, rating: 4.8, reviews: 1243, category: 'Luggage', emoji: '\uD83C\uDF92', gradient: 'linear-gradient(135deg, #2c3e50, #4a6741)' },
-  { id: 2, name: 'Noise-Cancelling Headphones', brand: 'SoundElite', price: 179.99, rating: 4.9, reviews: 3872, category: 'Electronics', emoji: '\uD83C\uDFA7', gradient: 'linear-gradient(135deg, #1a1a2e, #16213e)' },
-  { id: 3, name: 'Packing Cubes', brand: 'PackSmart', price: 34.99, rating: 4.7, reviews: 2156, category: 'Luggage', emoji: '\uD83E\uDDF3', gradient: 'linear-gradient(135deg, #4a2c2a, #6b3a3a)' },
-  { id: 4, name: 'Universal Adapter', brand: 'VoltWise', price: 29.99, rating: 4.6, reviews: 1890, category: 'Electronics', emoji: '\uD83D\uDD0C', gradient: 'linear-gradient(135deg, #2d3436, #636e72)' },
-  { id: 5, name: 'Neck Pillow', brand: 'CloudRest', price: 39.99, rating: 4.5, reviews: 984, category: 'Comfort', emoji: '\uD83D\uDCA4', gradient: 'linear-gradient(135deg, #3d3d6b, #5a5a8a)' },
-  { id: 6, name: 'Portable Charger', brand: 'JuicePack', price: 49.99, rating: 4.7, reviews: 2764, category: 'Electronics', emoji: '\uD83D\uDD0B', gradient: 'linear-gradient(135deg, #1e3a5f, #2d5a87)' },
-  { id: 7, name: 'Luggage Tag Set', brand: 'TagCraft', price: 14.99, rating: 4.3, reviews: 672, category: 'Accessories', emoji: '\uD83C\uDFF7\uFE0F', gradient: 'linear-gradient(135deg, #5a3e2b, #8b6914)' },
-  { id: 8, name: 'Travel Wallet', brand: 'SecureHold', price: 44.99, rating: 4.6, reviews: 1345, category: 'Accessories', emoji: '\uD83D\uDC5B', gradient: 'linear-gradient(135deg, #3e2723, #5d4037)' },
-  { id: 9, name: 'Compression Socks', brand: 'FlyFit', price: 24.99, rating: 4.4, reviews: 1102, category: 'Clothing', emoji: '\uD83E\uDDE6', gradient: 'linear-gradient(135deg, #1b5e20, #2e7d32)' },
-  { id: 10, name: 'Water Bottle', brand: 'HydroTrail', price: 32.99, rating: 4.8, reviews: 3201, category: 'Accessories', emoji: '\uD83E\uDDCA', gradient: 'linear-gradient(135deg, #0d47a1, #1565c0)' },
-  { id: 11, name: 'Camera Strap', brand: 'LensLink', price: 27.99, rating: 4.5, reviews: 543, category: 'Accessories', emoji: '\uD83D\uDCF7', gradient: 'linear-gradient(135deg, #4a148c, #6a1b9a)' },
-  { id: 12, name: 'First Aid Kit', brand: 'SafeTravel', price: 22.99, rating: 4.7, reviews: 876, category: 'Safety', emoji: '\uD83E\uDE7A', gradient: 'linear-gradient(135deg, #b71c1c, #c62828)' },
-  { id: 13, name: 'Eye Mask', brand: 'DreamShade', price: 18.99, rating: 4.4, reviews: 1567, category: 'Comfort', emoji: '\uD83D\uDE34', gradient: 'linear-gradient(135deg, #1a237e, #283593)' },
-  { id: 14, name: 'Travel Journal', brand: 'WanderNote', price: 19.99, rating: 4.6, reviews: 734, category: 'Accessories', emoji: '\uD83D\uDCD3', gradient: 'linear-gradient(135deg, #33691e, #558b2f)' },
-  { id: 15, name: 'Luggage Scale', brand: 'WeighRight', price: 16.99, rating: 4.3, reviews: 921, category: 'Luggage', emoji: '\u2696\uFE0F', gradient: 'linear-gradient(135deg, #37474f, #546e7a)' },
-  { id: 16, name: 'Rain Jacket', brand: 'StormShield', price: 89.99, rating: 4.8, reviews: 2087, category: 'Clothing', emoji: '\uD83E\UDDE5', gradient: 'linear-gradient(135deg, #004d40, #00695c)' },
+  { id: 1, name: 'Travel Backpack', brand: 'Nomatic', price: 149.99, rating: 4.8, reviews: 1243, category: 'Luggage', emoji: '', gradient: 'linear-gradient(135deg, #2c3e50, #4a6741)' },
+  { id: 2, name: 'Noise-Cancelling Headphones', brand: 'SoundElite', price: 179.99, rating: 4.9, reviews: 3872, category: 'Electronics', emoji: '', gradient: 'linear-gradient(135deg, #1a1a2e, #16213e)' },
+  { id: 3, name: 'Packing Cubes', brand: 'PackSmart', price: 34.99, rating: 4.7, reviews: 2156, category: 'Luggage', emoji: '', gradient: 'linear-gradient(135deg, #4a2c2a, #6b3a3a)' },
+  { id: 4, name: 'Universal Adapter', brand: 'VoltWise', price: 29.99, rating: 4.6, reviews: 1890, category: 'Electronics', emoji: '', gradient: 'linear-gradient(135deg, #2d3436, #636e72)' },
+  { id: 5, name: 'Neck Pillow', brand: 'CloudRest', price: 39.99, rating: 4.5, reviews: 984, category: 'Comfort', emoji: '', gradient: 'linear-gradient(135deg, #3d3d6b, #5a5a8a)' },
+  { id: 6, name: 'Portable Charger', brand: 'JuicePack', price: 49.99, rating: 4.7, reviews: 2764, category: 'Electronics', emoji: '', gradient: 'linear-gradient(135deg, #1e3a5f, #2d5a87)' },
+  { id: 7, name: 'Luggage Tag Set', brand: 'TagCraft', price: 14.99, rating: 4.3, reviews: 672, category: 'Accessories', emoji: '', gradient: 'linear-gradient(135deg, #5a3e2b, #8b6914)' },
+  { id: 8, name: 'Travel Wallet', brand: 'SecureHold', price: 44.99, rating: 4.6, reviews: 1345, category: 'Accessories', emoji: '', gradient: 'linear-gradient(135deg, #3e2723, #5d4037)' },
+  { id: 9, name: 'Compression Socks', brand: 'FlyFit', price: 24.99, rating: 4.4, reviews: 1102, category: 'Clothing', emoji: '', gradient: 'linear-gradient(135deg, #1b5e20, #2e7d32)' },
+  { id: 10, name: 'Water Bottle', brand: 'HydroTrail', price: 32.99, rating: 4.8, reviews: 3201, category: 'Accessories', emoji: '', gradient: 'linear-gradient(135deg, #0d47a1, #1565c0)' },
+  { id: 11, name: 'Camera Strap', brand: 'LensLink', price: 27.99, rating: 4.5, reviews: 543, category: 'Accessories', emoji: '', gradient: 'linear-gradient(135deg, #4a148c, #6a1b9a)' },
+  { id: 12, name: 'First Aid Kit', brand: 'SafeTravel', price: 22.99, rating: 4.7, reviews: 876, category: 'Safety', emoji: '', gradient: 'linear-gradient(135deg, #b71c1c, #c62828)' },
+  { id: 13, name: 'Eye Mask', brand: 'DreamShade', price: 18.99, rating: 4.4, reviews: 1567, category: 'Comfort', emoji: '', gradient: 'linear-gradient(135deg, #1a237e, #283593)' },
+  { id: 14, name: 'Travel Journal', brand: 'WanderNote', price: 19.99, rating: 4.6, reviews: 734, category: 'Accessories', emoji: '', gradient: 'linear-gradient(135deg, #33691e, #558b2f)' },
+  { id: 15, name: 'Luggage Scale', brand: 'WeighRight', price: 16.99, rating: 4.3, reviews: 921, category: 'Luggage', emoji: '', gradient: 'linear-gradient(135deg, #37474f, #546e7a)' },
+  { id: 16, name: 'Rain Jacket', brand: 'StormShield', price: 89.99, rating: 4.8, reviews: 2087, category: 'Clothing', emoji: '', gradient: 'linear-gradient(135deg, #004d40, #00695c)' },
 ];
 
 const SORT_OPTIONS = [
@@ -750,7 +750,7 @@ export default function MarketplacePage() {
           <p className="market-hero-subtitle">Premium travel gear &amp; essentials</p>
 
           <div className="market-cart-icon" onClick={() => setShowCart(true)}>
-            {'\uD83D\uDED2'}
+            Cart
             {cartCount > 0 && <span className="market-cart-badge">{cartCount}</span>}
           </div>
         </div>
@@ -806,7 +806,7 @@ export default function MarketplacePage() {
         <div className="market-grid">
           {filteredProducts.length === 0 && (
             <div className="market-empty-grid">
-              <div className="market-empty-grid-icon">{'\uD83D\uDD0D'}</div>
+              <div className="market-empty-grid-icon">Search</div>
               <p>No products match your filters.</p>
             </div>
           )}
@@ -864,7 +864,7 @@ export default function MarketplacePage() {
           <div className="market-cart-items">
             {cartItems.length === 0 ? (
               <div className="market-cart-empty">
-                <div className="market-cart-empty-icon">{'\uD83D\uDED2'}</div>
+                <div className="market-cart-empty-icon">Cart</div>
                 <span>Your cart is empty</span>
               </div>
             ) : (

@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const CATEGORIES = [
-  { id: 'all', icon: '✨', label: 'All Retreats' },
-  { id: 'yoga', icon: '🧘', label: 'Yoga Retreats' },
-  { id: 'spa', icon: '💆', label: 'Spa & Massage' },
-  { id: 'mountain', icon: '🏔️', label: 'Mountain Escapes' },
-  { id: 'ocean', icon: '🌊', label: 'Ocean Therapy' },
-  { id: 'detox', icon: '🍃', label: 'Detox Programs' },
-  { id: 'meditation', icon: '🧠', label: 'Meditation Centers' },
+  { id: 'all', icon: '', label: 'All Retreats' },
+  { id: 'yoga', icon: '', label: 'Yoga Retreats' },
+  { id: 'spa', icon: '', label: 'Spa & Massage' },
+  { id: 'mountain', icon: '', label: 'Mountain Escapes' },
+  { id: 'ocean', icon: '', label: 'Ocean Therapy' },
+  { id: 'detox', icon: '', label: 'Detox Programs' },
+  { id: 'meditation', icon: '', label: 'Meditation Centers' },
 ]
 
 const RETREATS = [
@@ -120,22 +120,22 @@ const RETREATS = [
 
 const WELLNESS_TIPS = [
   {
-    icon: '🌅',
+    icon: '',
     title: 'Morning Mindfulness',
     text: 'Start each day with 10 minutes of guided breathing. It reduces cortisol levels and sets a calm tone for the hours ahead.',
   },
   {
-    icon: '🥗',
+    icon: '',
     title: 'Nourish Intentionally',
     text: 'Choose whole, plant-rich foods during your retreat. Hydrate often and eat mindfully to amplify your body\'s healing response.',
   },
   {
-    icon: '🚶',
+    icon: '',
     title: 'Walk in Nature',
     text: 'Spend at least 30 minutes walking barefoot on natural ground. Earthing has been shown to reduce inflammation and improve sleep.',
   },
   {
-    icon: '📵',
+    icon: '',
     title: 'Digital Detox',
     text: 'Disconnect from screens for at least 4 hours daily. Replace scrolling with journaling, reading, or simply being present.',
   },
@@ -708,7 +708,7 @@ export default function WellnessPage() {
             </div>
           ) : (
             <div className="wellness-empty">
-              <span className="wellness-empty-icon">🔍</span>
+              <span className="wellness-empty-icon">No results</span>
               <p>No retreats found in this category. Try selecting a different one.</p>
             </div>
           )}

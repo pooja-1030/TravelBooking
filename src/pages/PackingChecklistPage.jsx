@@ -2,21 +2,21 @@ import React, { useState, useMemo, useCallback } from 'react';
 
 /* ─── Trip type data ─── */
 const TRIP_TYPES = [
-  { key: 'beach', label: 'Beach Vacation', icon: '🏖️' },
-  { key: 'city', label: 'City Break', icon: '🏙️' },
-  { key: 'adventure', label: 'Adventure Trip', icon: '🏔️' },
-  { key: 'business', label: 'Business Travel', icon: '💼' },
-  { key: 'winter', label: 'Winter Getaway', icon: '❄️' },
+  { key: 'beach', label: 'Beach Vacation', icon: '' },
+  { key: 'city', label: 'City Break', icon: '' },
+  { key: 'adventure', label: 'Adventure Trip', icon: '' },
+  { key: 'business', label: 'Business Travel', icon: '' },
+  { key: 'winter', label: 'Winter Getaway', icon: '' },
 ];
 
 /* ─── Category definitions ─── */
 const CATEGORIES = [
-  { key: 'clothing', label: 'Clothing', icon: '👕' },
-  { key: 'toiletries', label: 'Toiletries', icon: '🧴' },
-  { key: 'electronics', label: 'Electronics', icon: '📱' },
-  { key: 'documents', label: 'Documents', icon: '📄' },
-  { key: 'health', label: 'Health & Safety', icon: '💊' },
-  { key: 'extras', label: 'Extras', icon: '🎒' },
+  { key: 'clothing', label: 'Clothing', icon: '' },
+  { key: 'toiletries', label: 'Toiletries', icon: '' },
+  { key: 'electronics', label: 'Electronics', icon: '' },
+  { key: 'documents', label: 'Documents', icon: '' },
+  { key: 'health', label: 'Health & Safety', icon: '' },
+  { key: 'extras', label: 'Extras', icon: '' },
 ];
 
 /* ─── Items per trip type, organized by category ─── */
@@ -881,7 +881,7 @@ export default function PackingChecklistPage() {
         <div className="packing-content">
           {!selectedTrip && (
             <div className="packing-empty">
-              <span className="packing-empty-icon">🧳</span>
+              <span className="packing-empty-icon"></span>
               <h2>Choose a trip type to get started</h2>
               <p>We'll generate a personalized packing checklist for you</p>
             </div>
@@ -997,7 +997,7 @@ export default function PackingChecklistPage() {
                             + Add Item
                           </button>
                           <button className="packing-btn-ai" onClick={() => addAiSuggestions(cat.key)}>
-                            ✨ AI Suggestions
+                            AI Suggestions
                           </button>
                         </div>
                       </>
@@ -1012,7 +1012,7 @@ export default function PackingChecklistPage() {
                   ↻ Reset List
                 </button>
                 <button className="packing-btn-save" onClick={saveList}>
-                  💾 Save List
+                  Save List
                 </button>
               </div>
               {savedMsg && <div className="packing-saved-msg">{savedMsg}</div>}

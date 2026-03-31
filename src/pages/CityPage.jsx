@@ -5,15 +5,15 @@ import { CITIES } from '../data/travelData'
 
 /* ——— Section Navigation Tabs ——— */
 const SECTIONS = [
-  { id: 'about', label: 'About', icon: '📖' },
-  { id: 'gallery', label: 'Gallery', icon: '📸' },
-  { id: 'hotels', label: 'Hotels', icon: '🏨' },
-  { id: 'food', label: 'Food', icon: '🍽️' },
-  { id: 'attractions', label: 'Attractions', icon: '🗺️' },
-  { id: 'transport', label: 'Transport', icon: '✈️' },
-  { id: 'packages', label: 'Packages', icon: '📅' },
-  { id: 'reviews', label: 'Reviews', icon: '💬' },
-  { id: 'budget', label: 'Budget', icon: '📊' },
+  { id: 'about', label: 'About', icon: '' },
+  { id: 'gallery', label: 'Gallery', icon: '' },
+  { id: 'hotels', label: 'Hotels', icon: '' },
+  { id: 'food', label: 'Food', icon: '' },
+  { id: 'attractions', label: 'Attractions', icon: '' },
+  { id: 'transport', label: 'Transport', icon: '' },
+  { id: 'packages', label: 'Packages', icon: '' },
+  { id: 'reviews', label: 'Reviews', icon: '' },
+  { id: 'budget', label: 'Budget', icon: '' },
 ]
 
 export default function CityPage() {
@@ -131,7 +131,7 @@ export default function CityPage() {
     return (
       <div className="city-not-found">
         <div className="container" style={{ textAlign: 'center', padding: '200px 24px 100px' }}>
-          <h1 style={{ fontSize: '3rem', marginBottom: 16 }}>🗺️</h1>
+          <h1 style={{ fontSize: '3rem', marginBottom: 16 }}></h1>
           <h2 className="section-title">Destination Not Found</h2>
           <p className="section-subtitle" style={{ margin: '0 auto 32px' }}>We couldn't find that destination. Try searching for something else.</p>
           <Link to="/search" className="btn btn-primary">Browse All Destinations</Link>
@@ -192,10 +192,10 @@ export default function CityPage() {
               />
               <div className="hotel-modal-overlay" />
               <div className="hotel-modal-header-info">
-                <div className="hotel-modal-stars">{'⭐'.repeat(selectedHotel.stars)}</div>
+                <div className="hotel-modal-stars">{'*'.repeat(selectedHotel.stars)}</div>
                 <h2>{selectedHotel.name}</h2>
-                <p className="hotel-modal-location">📍 {selectedHotel.location || city.name}</p>
-                <div className="hotel-modal-rating-badge">⭐ {selectedHotel.rating} <span>Excellent</span></div>
+                <p className="hotel-modal-location">{selectedHotel.location || city.name}</p>
+                <div className="hotel-modal-rating-badge">* {selectedHotel.rating} <span>Excellent</span></div>
               </div>
             </div>
 
@@ -208,7 +208,7 @@ export default function CityPage() {
                     <div className="room-info">
                       <h4>{room.name}</h4>
                       <div className={`room-availability ${room.available <= 2 ? 'low' : ''}`}>
-                        {room.available <= 2 ? '🔥' : '✓'} {room.available} {room.available === 1 ? 'room' : 'rooms'} left
+                        {room.available <= 2 ? '!' : '✓'} {room.available} {room.available === 1 ? 'room' : 'rooms'} left
                       </div>
                       <ul className="room-amenities">
                         {room.amenities.map(am => <li key={am}><span className="amenity-check">✓</span> {am}</li>)}
@@ -243,12 +243,12 @@ export default function CityPage() {
           <div className="city-hero-text">
             <span className="city-badge">{city.badge}</span>
             <h1>{city.name}</h1>
-            <p className="city-country">{'\ud83d\udccd'} {city.country}</p>
+            <p className="city-country">{city.country}</p>
             <p className="city-tagline">"{city.shortDesc}"</p>
             <div className="hero-quick-badges">
-              <div className="quick-badge glass-badge">{'\u2b50'} {city.rating}</div>
-              <div className="quick-badge glass-badge">{'\ud83d\udcb0'} From {convertPrice(city.price)}</div>
-              <div className="quick-badge glass-badge">{'\ud83c\udf26'} {city.bestTimeToVisit.split('(')[0].trim()}</div>
+              <div className="quick-badge glass-badge">{city.rating}</div>
+              <div className="quick-badge glass-badge">From {convertPrice(city.price)}</div>
+              <div className="quick-badge glass-badge">{city.bestTimeToVisit.split('(')[0].trim()}</div>
             </div>
           </div>
           <div className="city-hero-bottom-actions">
@@ -258,7 +258,7 @@ export default function CityPage() {
               className={`btn btn-glass btn-lg city-hero-wishlist${isWishlisted(city.id, 'destination') ? ' wishlisted' : ''}`}
               onClick={() => toggleWishlist({ id: city.id, type: 'destination', name: city.name, image: city.heroImage, price: city.price, country: city.country })}
             >
-              {isWishlisted(city.id, 'destination') ? '\u2764\ufe0f Saved' : '\ud83e\udd0d Save'}
+              {isWishlisted(city.id, 'destination') ? 'Saved' : 'Save'}
             </button>
           </div>
         </div>
@@ -293,7 +293,7 @@ export default function CityPage() {
             <div className="about-highlights">
               {city.culture && (
                 <div className="about-highlight-card">
-                  <span className="about-highlight-icon">🎭</span>
+                  <span className="about-highlight-icon"></span>
                   <div>
                     <strong>Culture</strong>
                     <p>{city.culture}</p>
@@ -302,7 +302,7 @@ export default function CityPage() {
               )}
               {city.weather && (
                 <div className="about-highlight-card">
-                  <span className="about-highlight-icon">🌤️</span>
+                  <span className="about-highlight-icon"></span>
                   <div>
                     <strong>Weather</strong>
                     <p>{city.weather}</p>
@@ -321,19 +321,19 @@ export default function CityPage() {
           <div className="city-highlights-card">
             <h3>Key Information</h3>
             <div className="highlight-item">
-              <span className="highlight-icon">🗓️</span>
+              <span className="highlight-icon"></span>
               <div><strong>Best Time to Visit</strong><p>{city.bestTimeToVisit}</p></div>
             </div>
             <div className="highlight-item">
-              <span className="highlight-icon">🏷️</span>
+              <span className="highlight-icon"></span>
               <div><strong>Price Range</strong><p>{city.priceRange}</p></div>
             </div>
             <div className="highlight-item">
-              <span className="highlight-icon">⭐</span>
+              <span className="highlight-icon">*</span>
               <div><strong>Overall Rating</strong><p>{city.rating} / 5.0 ({city.reviewCount.toLocaleString()} reviews)</p></div>
             </div>
             <div className="highlight-item">
-              <span className="highlight-icon">💰</span>
+              <span className="highlight-icon"></span>
               <div><strong>Daily Budget</strong><p>{city.avgCost}</p></div>
             </div>
           </div>
@@ -341,7 +341,7 @@ export default function CityPage() {
 
         {/* ===== 2. IMAGE GALLERY ===== */}
         <section className="city-gallery reveal" id="gallery" ref={el => sectionRefs.current.gallery = el}>
-          <h2 className="section-title">📸 City Gallery</h2>
+          <h2 className="section-title">City Gallery</h2>
           <div className="gallery-grid">
             {city.images.slice(0, 6).map((img, i) => (
               <div
@@ -351,7 +351,7 @@ export default function CityPage() {
               >
                 <img src={img} alt={`${city.name} ${i + 1}`} loading="lazy" onError={(e) => { e.target.onerror = null; e.target.src = city.heroImage }} />
                 <div className="gallery-item-overlay">
-                  <span>🔍 View Fullscreen</span>
+                  <span>View Fullscreen</span>
                 </div>
               </div>
             ))}
@@ -362,7 +362,7 @@ export default function CityPage() {
         <section className="city-section reveal" id="hotels" ref={el => sectionRefs.current.hotels = el}>
           <div className="section-header-row">
             <div>
-              <h2 className="section-title">🏨 Premium Stays</h2>
+              <h2 className="section-title">Premium Stays</h2>
               <p className="section-subtitle">Click a hotel to view rooms and availability</p>
             </div>
             <div className="hotel-filters">
@@ -372,7 +372,7 @@ export default function CityPage() {
                   className={`filter-chip ${hotelFilter === f ? 'active' : ''}`}
                   onClick={() => setHotelFilter(f)}
                 >
-                  {f === 'all' ? 'All' : f === 'budget' ? '💰 Budget' : f === 'mid' ? '✨ Mid-Range' : '👑 Luxury'}
+                  {f === 'all' ? 'All' : f === 'budget' ? 'Budget' : f === 'mid' ? 'Mid-Range' : 'Luxury'}
                 </button>
               ))}
             </div>
@@ -382,15 +382,15 @@ export default function CityPage() {
               <div className="hotel-card editable-card" key={h.id || i} onClick={() => setSelectedHotel(h)} style={{ animationDelay: `${i * 80}ms` }}>
                 <div className="hotel-card-img">
                   <img src={h.image || city.images[2]} alt={h.name} loading="lazy" onError={(e) => { e.target.onerror = null; e.target.src = city.heroImage }} />
-                  <div className="hotel-rating-badge">⭐ {h.rating}</div>
+                  <div className="hotel-rating-badge">* {h.rating}</div>
                   {h.rooms && h.rooms.some(r => r.available <= 2) && (
                     <div className="hotel-low-avail">Few rooms left!</div>
                   )}
                 </div>
                 <div className="hotel-card-content">
-                  <div className="hotel-stars">{'⭐'.repeat(h.stars)}</div>
+                  <div className="hotel-stars">{'*'.repeat(h.stars)}</div>
                   <h4>{h.name}</h4>
-                  <p className="text-gray text-sm">📍 {h.location || city.name}</p>
+                  <p className="text-gray text-sm">{h.location || city.name}</p>
                   <div className="hotel-meta">
                     <span className="hotel-price">{convertPrice(h.price)}<span>/night</span></span>
                     <Link to={`/hotel/${city.id}?hotel=${h.id}`} className="link-text" onClick={e => e.stopPropagation()}>View Details {'\u2192'}</Link>
@@ -408,7 +408,7 @@ export default function CityPage() {
         {/* ===== 5. FOOD & RESTAURANTS ===== */}
         {city.restaurants && (
           <section className="city-section reveal" id="food" ref={el => sectionRefs.current.food = el}>
-            <h2 className="section-title">🍽️ Food & Restaurants</h2>
+            <h2 className="section-title">Food & Restaurants</h2>
             <p className="section-subtitle">Discover the best culinary experiences in {city.name}</p>
             <div className="restaurants-grid">
               {city.restaurants.map((r, i) => (
@@ -420,7 +420,7 @@ export default function CityPage() {
                   <div className="restaurant-info">
                     <div className="restaurant-header">
                       <h4>{r.name}</h4>
-                      <span className="restaurant-rating">⭐ {r.rating}</span>
+                      <span className="restaurant-rating">* {r.rating}</span>
                     </div>
                     <p className="restaurant-cuisine">{r.cuisine}</p>
                     <div className="restaurant-dishes">
@@ -438,7 +438,7 @@ export default function CityPage() {
 
         {/* ===== 7. TOP ATTRACTIONS ===== */}
         <section className="city-section reveal" id="attractions" ref={el => sectionRefs.current.attractions = el}>
-          <h2 className="section-title">🗺️ Top Attractions</h2>
+          <h2 className="section-title">Top Attractions</h2>
           <p className="section-subtitle">Must-visit places in {city.name}</p>
           <div className="attractions-grid">
             {city.attractions.map((a, i) => (
@@ -462,7 +462,7 @@ export default function CityPage() {
           </div>
           {itinerary.length > 0 && (
             <div className="itinerary-summary">
-              <span className="itinerary-icon">📋</span>
+              <span className="itinerary-icon"></span>
               <span>Your itinerary: <strong>{itinerary.length} {itinerary.length === 1 ? 'place' : 'places'}</strong> added</span>
               <button className="link-btn" onClick={() => setItinerary([])}>Clear all</button>
             </div>
@@ -472,23 +472,23 @@ export default function CityPage() {
         {/* ===== 6. TRAVEL & TRANSPORT ===== */}
         {city.transport && (
           <section className="city-section reveal" id="transport" ref={el => sectionRefs.current.transport = el}>
-            <h2 className="section-title">✈️ Travel & Transport</h2>
+            <h2 className="section-title">Travel & Transport</h2>
             <div className="transport-grid">
               <div className="transport-card">
-                <div className="transport-icon">🛫</div>
+                <div className="transport-icon"></div>
                 <h4>How to Reach</h4>
                 <p>{city.transport.flights}</p>
                 {city.transport.trains && <p className="transport-sub">{city.transport.trains}</p>}
               </div>
               <div className="transport-card">
-                <div className="transport-icon">🚇</div>
+                <div className="transport-icon"></div>
                 <h4>Local Transport</h4>
                 <ul className="transport-list">
                   {city.transport.local.map(l => <li key={l}>{l}</li>)}
                 </ul>
               </div>
               <div className="transport-card">
-                <div className="transport-icon">💵</div>
+                <div className="transport-icon"></div>
                 <h4>Estimated Costs</h4>
                 <p>{city.transport.cost}</p>
               </div>
@@ -499,7 +499,7 @@ export default function CityPage() {
         {/* ===== 11. INTERACTIVE MAP ===== */}
         {city.mapImage && (
           <section className="city-section reveal map-section">
-            <h2 className="section-title">📍 Interactive Map</h2>
+            <h2 className="section-title">Interactive Map</h2>
             <p className="section-subtitle">Hotels, attractions, and restaurants in {city.name}</p>
             <div className="map-container">
               <img src={city.mapImage} alt={`Map of ${city.name}`} className="map-img" loading="lazy" />
@@ -518,7 +518,7 @@ export default function CityPage() {
         {/* ===== 8. TRAVEL PACKAGES ===== */}
         {city.packages && (
           <section className="city-section reveal" id="packages" ref={el => sectionRefs.current.packages = el}>
-            <h2 className="section-title">📅 Travel Packages</h2>
+            <h2 className="section-title">Travel Packages</h2>
             <p className="section-subtitle">Pre-built packages for a hassle-free trip</p>
             <div className="packages-grid">
               {city.packages.map((p, i) => (
@@ -529,10 +529,10 @@ export default function CityPage() {
                     <div className="package-duration">{p.duration}</div>
                   </div>
                   <div className="package-body">
-                    <div className="package-detail"><span className="package-detail-icon">🏨</span> <strong>Stay:</strong> {p.hotel}</div>
-                    {p.meals && <div className="package-detail"><span className="package-detail-icon">🍽️</span> <strong>Meals:</strong> {p.meals}</div>}
+                    <div className="package-detail"><span className="package-detail-icon"></span> <strong>Stay:</strong> {p.hotel}</div>
+                    {p.meals && <div className="package-detail"><span className="package-detail-icon"></span> <strong>Meals:</strong> {p.meals}</div>}
                     <div className="package-activities">
-                      <div className="package-detail"><span className="package-detail-icon">🎯</span> <strong>Includes:</strong></div>
+                      <div className="package-detail"><span className="package-detail-icon"></span> <strong>Includes:</strong></div>
                       <div className="activity-tags">
                         {p.activities.map(a => <span key={a} className="activity-tag">{a}</span>)}
                       </div>
@@ -557,13 +557,13 @@ export default function CityPage() {
           {/* Reviews */}
           {city.reviews && (
             <div className="city-reviews" id="reviews-content">
-              <h2 className="section-title">💬 Traveler Reviews</h2>
+              <h2 className="section-title">Traveler Reviews</h2>
 
               {/* Overall rating summary */}
               <div className="rating-summary">
                 <div className="rating-big-number">{overallRating}</div>
                 <div className="rating-summary-info">
-                  <div className="rating-stars-row">{'⭐'.repeat(Math.round(overallRating))}</div>
+                  <div className="rating-stars-row">{'*'.repeat(Math.round(overallRating))}</div>
                   <p>Based on {city.reviewCount.toLocaleString()} reviews</p>
                 </div>
                 <div className="rating-bars">
@@ -588,7 +588,7 @@ export default function CityPage() {
                       <div className="review-avatar">{r.avatar}</div>
                       <div className="review-author">
                         <strong>{r.name}</strong>
-                        <div className="review-stars">{'⭐'.repeat(Math.floor(r.rating))}</div>
+                        <div className="review-stars">{'*'.repeat(Math.floor(r.rating))}</div>
                       </div>
                     </div>
                     <p className="review-comment">"{r.comment}"</p>
@@ -601,7 +601,7 @@ export default function CityPage() {
           {/* Budget Planner */}
           {city.budget && (
             <div className="budget-planner" id="budget" ref={el => sectionRefs.current.budget = el}>
-              <h2 className="section-title">📊 Budget Planner</h2>
+              <h2 className="section-title">Budget Planner</h2>
               <p className="text-gray">Estimated average cost breakdown per person</p>
 
               <div className="budget-total">
@@ -611,10 +611,10 @@ export default function CityPage() {
 
               <div className="budget-bars">
                 {[
-                  { key: 'stay', label: '🏨 Stay', color: 'stay' },
-                  { key: 'food', label: '🍽️ Food', color: 'food' },
-                  { key: 'travel', label: '🚇 Travel', color: 'travel' },
-                  { key: 'activities', label: '🎯 Activities', color: 'activities' },
+                  { key: 'stay', label: 'Stay', color: 'stay' },
+                  { key: 'food', label: 'Food', color: 'food' },
+                  { key: 'travel', label: 'Travel', color: 'travel' },
+                  { key: 'activities', label: 'Activities', color: 'activities' },
                 ].map(item => (
                   <div className="budget-bar-row" key={item.key}>
                     <div className="budget-bar-label">
@@ -631,22 +631,22 @@ export default function CityPage() {
 
               <div className="budget-breakdown-grid">
                 <div className="budget-card">
-                  <span className="budget-card-icon">🏨</span>
+                  <span className="budget-card-icon"></span>
                   <div className="budget-card-value">{convertPrice(city.budget.stay)}/day</div>
                   <div className="budget-card-label">Accommodation</div>
                 </div>
                 <div className="budget-card">
-                  <span className="budget-card-icon">🍽️</span>
+                  <span className="budget-card-icon"></span>
                   <div className="budget-card-value">{convertPrice(city.budget.food)}/day</div>
                   <div className="budget-card-label">Food & Dining</div>
                 </div>
                 <div className="budget-card">
-                  <span className="budget-card-icon">🚇</span>
+                  <span className="budget-card-icon"></span>
                   <div className="budget-card-value">{convertPrice(city.budget.travel)}/day</div>
                   <div className="budget-card-label">Transport</div>
                 </div>
                 <div className="budget-card">
-                  <span className="budget-card-icon">🎯</span>
+                  <span className="budget-card-icon"></span>
                   <div className="budget-card-value">{convertPrice(city.budget.activities)}/day</div>
                   <div className="budget-card-label">Activities</div>
                 </div>
@@ -657,15 +657,15 @@ export default function CityPage() {
 
         {/* ===== SMART TRAVEL INSIGHTS ===== */}
         <section className="city-section reveal city-insights-section">
-          <h2 className="section-title">{'\ud83c\udf1f'} Smart Travel Insights</h2>
+          <h2 className="section-title">Smart Travel Insights</h2>
           <div className="city-insights-grid">
             <div className="city-insight-card">
-              <span className="city-insight-icon">{'\ud83c\udf24\ufe0f'}</span>
+              <span className="city-insight-icon">Weather</span>
               <h4>Weather</h4>
               <p>{city.weather || 'Check local forecast for latest conditions'}</p>
             </div>
             <div className="city-insight-card">
-              <span className="city-insight-icon">{'\ud83d\udc65'}</span>
+              <span className="city-insight-icon">Crowd</span>
               <h4>Crowd Level</h4>
               <div className="crowd-indicator">
                 <div className="crowd-bar"><div className="crowd-fill" style={{ width: '55%' }} /></div>
@@ -673,7 +673,7 @@ export default function CityPage() {
               </div>
             </div>
             <div className="city-insight-card">
-              <span className="city-insight-icon">{'\ud83d\udee1\ufe0f'}</span>
+              <span className="city-insight-icon">Safety</span>
               <h4>Safety Score</h4>
               <div className="safety-score">
                 <span className="safety-num">{(4.2 + Math.random() * 0.6).toFixed(1)}</span>
@@ -681,7 +681,7 @@ export default function CityPage() {
               </div>
             </div>
             <div className="city-insight-card">
-              <span className="city-insight-icon">{'\ud83d\udcc5'}</span>
+              <span className="city-insight-icon">Calendar</span>
               <h4>Best Time to Visit</h4>
               <p>{city.bestTimeToVisit}</p>
             </div>
@@ -690,11 +690,11 @@ export default function CityPage() {
 
         {/* ===== LOCAL EXPERIENCES ===== */}
         <section className="city-section reveal city-experiences-section">
-          <h2 className="section-title">{'\ud83e\uddd1\u200d\ud83c\udf73'} Local Experiences</h2>
+          <h2 className="section-title">Local Experiences</h2>
           <p className="section-subtitle">Authentic activities and hidden gems in {city.name}</p>
           <div className="experiences-grid">
             <div className="experience-card">
-              <div className="experience-icon">{'\ud83c\udf73'}</div>
+              <div className="experience-icon">Cook</div>
               <h4>Cooking Class</h4>
               <p>Learn to cook authentic local cuisine with a master chef</p>
               <div className="experience-footer">
@@ -703,7 +703,7 @@ export default function CityPage() {
               </div>
             </div>
             <div className="experience-card">
-              <div className="experience-icon">{'\ud83d\udeb6'}</div>
+              <div className="experience-icon">Walk</div>
               <h4>Guided Walking Tour</h4>
               <p>Explore hidden alleys, local markets, and cultural landmarks</p>
               <div className="experience-footer">
@@ -712,7 +712,7 @@ export default function CityPage() {
               </div>
             </div>
             <div className="experience-card">
-              <div className="experience-icon">{'\ud83c\udfbf'}</div>
+              <div className="experience-icon">Sports</div>
               <h4>Adventure Activity</h4>
               <p>Thrilling outdoor adventures tailored to {city.name}</p>
               <div className="experience-footer">
@@ -721,7 +721,7 @@ export default function CityPage() {
               </div>
             </div>
             <div className="experience-card">
-              <div className="experience-icon">{'\ud83c\udfad'}</div>
+              <div className="experience-icon">Arts</div>
               <h4>Cultural Workshop</h4>
               <p>Immerse in traditional arts, crafts, and performances</p>
               <div className="experience-footer">
@@ -734,12 +734,12 @@ export default function CityPage() {
 
         {/* ===== EMERGENCY & SAFETY ===== */}
         <section className="city-section reveal city-emergency-section">
-          <h2 className="section-title">{'\ud83c\udd98'} Emergency & Safety</h2>
+          <h2 className="section-title">Emergency & Safety</h2>
           <div className="emergency-grid">
-            <div className="emergency-card"><span>{'\ud83c\udfe5'}</span><h4>Hospitals</h4><p>International SOS Clinic, {city.name} General Hospital</p></div>
-            <div className="emergency-card"><span>{'\ud83d\udcde'}</span><h4>Emergency Numbers</h4><p>Police: 911 | Ambulance: 112 | Fire: 101</p></div>
-            <div className="emergency-card"><span>{'\ud83d\udee1\ufe0f'}</span><h4>Safety Tips</h4><p>Keep copies of passport, use hotel safes, stay aware in crowds</p></div>
-            <div className="emergency-card"><span>{'\ud83d\udcb3'}</span><h4>Travel Insurance</h4><p>Comprehensive coverage recommended for international travel</p></div>
+            <div className="emergency-card"><span>+</span><h4>Hospitals</h4><p>International SOS Clinic, {city.name} General Hospital</p></div>
+            <div className="emergency-card"><span>Tel</span><h4>Emergency Numbers</h4><p>Police: 911 | Ambulance: 112 | Fire: 101</p></div>
+            <div className="emergency-card"><span>Safety</span><h4>Safety Tips</h4><p>Keep copies of passport, use hotel safes, stay aware in crowds</p></div>
+            <div className="emergency-card"><span>Card</span><h4>Travel Insurance</h4><p>Comprehensive coverage recommended for international travel</p></div>
           </div>
         </section>
 

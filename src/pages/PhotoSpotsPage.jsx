@@ -8,12 +8,12 @@ const TAGS = ['All', 'Sunset', 'Architecture', 'Nature', 'Street', 'Aerial', 'Ni
 const SORT_OPTIONS = ['Most Popular', 'Nearest', 'Recently Added'];
 
 const BEST_TIME_ICONS = {
-  'Golden Hour': '🌅',
-  'Sunrise': '🌄',
-  'Blue Hour': '🌆',
-  'Night': '🌙',
-  'Midday': '☀️',
-  'Any Time': '🕐',
+  'Golden Hour': '',
+  'Sunrise': '',
+  'Blue Hour': '',
+  'Night': '',
+  'Midday': '',
+  'Any Time': '',
 };
 
 const PHOTO_SPOTS = [
@@ -732,7 +732,7 @@ export default function PhotoSpotsPage() {
         {/* Grid */}
         {filteredSpots.length === 0 ? (
           <div className="photo-empty">
-            <div className="photo-empty-icon">📷</div>
+            <div className="photo-empty-icon">No results</div>
             <p className="photo-empty-text">No spots found</p>
             <p className="photo-empty-sub">Try adjusting your filters to discover more locations.</p>
           </div>
@@ -750,7 +750,7 @@ export default function PhotoSpotsPage() {
 
                   {/* Best time badge */}
                   <div className="photo-best-time">
-                    <span>{BEST_TIME_ICONS[spot.bestTime] || '🕐'}</span>
+                    <span>{BEST_TIME_ICONS[spot.bestTime] || ''}</span>
                     {spot.bestTime}
                   </div>
 
@@ -763,7 +763,7 @@ export default function PhotoSpotsPage() {
                   <div className="photo-card-overlay">
                     <div className="photo-overlay-actions">
                       <button className="photo-view-btn">
-                        📍 View Location
+                        View Location
                       </button>
                       <button
                         className={`photo-overlay-icon${savedSpots.has(spot.id) ? ' photo-overlay-icon--saved' : ''}`}
@@ -798,7 +798,7 @@ export default function PhotoSpotsPage() {
                     ))}
                   </div>
                   <div className="photo-card-tip">
-                    <span className="photo-card-tip-icon">💡</span>
+                    <span className="photo-card-tip-icon">Tip:</span>
                     <span>{spot.tip}</span>
                   </div>
                 </div>

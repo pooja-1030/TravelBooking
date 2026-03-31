@@ -2,21 +2,21 @@ import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 const DESTINATIONS = [
-  { name: 'Bali, Indonesia', icon: '🏝️', tags: ['beach', 'budget', 'warm'] },
-  { name: 'Bangkok, Thailand', icon: '🛕', tags: ['budget', 'city', 'warm'] },
-  { name: 'Maldives', icon: '🏖️', tags: ['beach', 'luxury', 'warm'] },
-  { name: 'Paris, France', icon: '🗼', tags: ['luxury', 'city', 'mild'] },
-  { name: 'Switzerland', icon: '🏔️', tags: ['cold', 'luxury', 'nature'] },
-  { name: 'Iceland', icon: '🧊', tags: ['cold', 'nature', 'adventure'] },
-  { name: 'Tokyo, Japan', icon: '🏯', tags: ['city', 'mild', 'culture'] },
-  { name: 'Dubai, UAE', icon: '🌆', tags: ['luxury', 'warm', 'city'] },
-  { name: 'New York, USA', icon: '🗽', tags: ['city', 'mild', 'culture'] },
-  { name: 'Santorini, Greece', icon: '🏛️', tags: ['beach', 'warm', 'luxury'] },
-  { name: 'Goa, India', icon: '🌴', tags: ['beach', 'budget', 'warm'] },
-  { name: 'Barcelona, Spain', icon: '⛪', tags: ['city', 'beach', 'warm'] },
-  { name: 'Cape Town, South Africa', icon: '🦁', tags: ['nature', 'mild', 'adventure'] },
-  { name: 'Kyoto, Japan', icon: '⛩️', tags: ['culture', 'mild', 'nature'] },
-  { name: 'Patagonia, Argentina', icon: '🏔️', tags: ['cold', 'nature', 'adventure'] },
+  { name: 'Bali, Indonesia', icon: '', tags: ['beach', 'budget', 'warm'] },
+  { name: 'Bangkok, Thailand', icon: '', tags: ['budget', 'city', 'warm'] },
+  { name: 'Maldives', icon: '', tags: ['beach', 'luxury', 'warm'] },
+  { name: 'Paris, France', icon: '', tags: ['luxury', 'city', 'mild'] },
+  { name: 'Switzerland', icon: '', tags: ['cold', 'luxury', 'nature'] },
+  { name: 'Iceland', icon: '', tags: ['cold', 'nature', 'adventure'] },
+  { name: 'Tokyo, Japan', icon: '', tags: ['city', 'mild', 'culture'] },
+  { name: 'Dubai, UAE', icon: '', tags: ['luxury', 'warm', 'city'] },
+  { name: 'New York, USA', icon: '', tags: ['city', 'mild', 'culture'] },
+  { name: 'Santorini, Greece', icon: '', tags: ['beach', 'warm', 'luxury'] },
+  { name: 'Goa, India', icon: '', tags: ['beach', 'budget', 'warm'] },
+  { name: 'Barcelona, Spain', icon: '', tags: ['city', 'beach', 'warm'] },
+  { name: 'Cape Town, South Africa', icon: '', tags: ['nature', 'mild', 'adventure'] },
+  { name: 'Kyoto, Japan', icon: '', tags: ['culture', 'mild', 'nature'] },
+  { name: 'Patagonia, Argentina', icon: '', tags: ['cold', 'nature', 'adventure'] },
 ]
 
 const HOTEL_TIERS = ['Budget', 'Standard', 'Premium', 'Luxury', 'Ultra Luxury']
@@ -114,7 +114,7 @@ export default function TripCustomizerPage() {
             {/* Budget */}
             <div className="customizer-slider-group">
               <div className="customizer-slider-header">
-                <span className="customizer-slider-icon">💰</span>
+                <span className="customizer-slider-icon"></span>
                 <span className="customizer-slider-label">Budget</span>
                 <span className="customizer-slider-value">${budget.toLocaleString()}</span>
               </div>
@@ -136,7 +136,7 @@ export default function TripCustomizerPage() {
             {/* Luxury Level */}
             <div className="customizer-slider-group">
               <div className="customizer-slider-header">
-                <span className="customizer-slider-icon">⭐</span>
+                <span className="customizer-slider-icon"></span>
                 <span className="customizer-slider-label">Luxury Level</span>
                 <span className="customizer-slider-value customizer-stars">{starDisplay}</span>
               </div>
@@ -158,7 +158,7 @@ export default function TripCustomizerPage() {
             {/* Duration */}
             <div className="customizer-slider-group">
               <div className="customizer-slider-header">
-                <span className="customizer-slider-icon">📅</span>
+                <span className="customizer-slider-icon"></span>
                 <span className="customizer-slider-label">Duration</span>
                 <span className="customizer-slider-value">
                   {duration} {duration === 1 ? 'day' : 'days'}
@@ -182,7 +182,7 @@ export default function TripCustomizerPage() {
             {/* Group Size */}
             <div className="customizer-slider-group">
               <div className="customizer-slider-header">
-                <span className="customizer-slider-icon">👥</span>
+                <span className="customizer-slider-icon"></span>
                 <span className="customizer-slider-label">Group Size</span>
                 <span className="customizer-slider-value">
                   {groupSize} {groupSize === 1 ? 'person' : 'people'}
@@ -206,7 +206,7 @@ export default function TripCustomizerPage() {
             {/* Temperature */}
             <div className="customizer-slider-group">
               <div className="customizer-slider-header">
-                <span className="customizer-slider-icon">🌡️</span>
+                <span className="customizer-slider-icon"></span>
                 <span className="customizer-slider-label">Temperature Preference</span>
                 <span className="customizer-slider-value">{tempLabel}</span>
               </div>
@@ -223,8 +223,8 @@ export default function TripCustomizerPage() {
                 />
               </div>
               <div className="customizer-range-labels">
-                <span>❄️ Cold</span>
-                <span>🔥 Hot</span>
+                <span>Cold</span>
+                <span>Hot</span>
               </div>
             </div>
 
@@ -233,11 +233,11 @@ export default function TripCustomizerPage() {
               <h3 className="customizer-toggles-title">Preferences</h3>
               <div className="customizer-toggles-grid">
                 {[
-                  { key: 'beach', label: 'Beach Access', icon: '🏖️' },
-                  { key: 'city', label: 'City Center', icon: '🏙️' },
-                  { key: 'wifi', label: 'WiFi Essential', icon: '📶' },
-                  { key: 'pet', label: 'Pet Friendly', icon: '🐾' },
-                  { key: 'allInclusive', label: 'All Inclusive', icon: '🍽️' },
+                  { key: 'beach', label: 'Beach Access', icon: '' },
+                  { key: 'city', label: 'City Center', icon: '' },
+                  { key: 'wifi', label: 'WiFi Essential', icon: '' },
+                  { key: 'pet', label: 'Pet Friendly', icon: '' },
+                  { key: 'allInclusive', label: 'All Inclusive', icon: '' },
                 ].map((item) => (
                   <button
                     key={item.key}
@@ -290,22 +290,22 @@ export default function TripCustomizerPage() {
               {/* Summary Grid */}
               <div className="customizer-preview-grid">
                 <div className="customizer-preview-stat">
-                  <span className="customizer-preview-stat-icon">📅</span>
+                  <span className="customizer-preview-stat-icon"></span>
                   <span className="customizer-preview-stat-value">{duration} {duration === 1 ? 'Day' : 'Days'}</span>
                   <span className="customizer-preview-stat-label">Duration</span>
                 </div>
                 <div className="customizer-preview-stat">
-                  <span className="customizer-preview-stat-icon">👥</span>
+                  <span className="customizer-preview-stat-icon"></span>
                   <span className="customizer-preview-stat-value">{groupSize}</span>
                   <span className="customizer-preview-stat-label">{groupSize === 1 ? 'Traveler' : 'Travelers'}</span>
                 </div>
                 <div className="customizer-preview-stat">
-                  <span className="customizer-preview-stat-icon">🌡️</span>
+                  <span className="customizer-preview-stat-icon"></span>
                   <span className="customizer-preview-stat-value">{tempLabel}</span>
                   <span className="customizer-preview-stat-label">Climate</span>
                 </div>
                 <div className="customizer-preview-stat">
-                  <span className="customizer-preview-stat-icon">🏨</span>
+                  <span className="customizer-preview-stat-icon"></span>
                   <span className="customizer-preview-stat-value">{hotelTier}</span>
                   <span className="customizer-preview-stat-label">Hotel Tier</span>
                 </div>
@@ -315,11 +315,11 @@ export default function TripCustomizerPage() {
               <div className="customizer-preview-prefs">
                 <p className="customizer-preview-prefs-label">Active Preferences</p>
                 <div className="customizer-preview-prefs-tags">
-                  {toggles.beach && <span className="customizer-tag">🏖️ Beach</span>}
-                  {toggles.city && <span className="customizer-tag">🏙️ City</span>}
-                  {toggles.wifi && <span className="customizer-tag">📶 WiFi</span>}
-                  {toggles.pet && <span className="customizer-tag">🐾 Pets</span>}
-                  {toggles.allInclusive && <span className="customizer-tag">🍽️ All Inclusive</span>}
+                  {toggles.beach && <span className="customizer-tag">Beach</span>}
+                  {toggles.city && <span className="customizer-tag">City</span>}
+                  {toggles.wifi && <span className="customizer-tag">WiFi</span>}
+                  {toggles.pet && <span className="customizer-tag">Pets</span>}
+                  {toggles.allInclusive && <span className="customizer-tag">All Inclusive</span>}
                   {!Object.values(toggles).some(Boolean) && (
                     <span className="customizer-tag customizer-tag-dim">No preferences selected</span>
                   )}
