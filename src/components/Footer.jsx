@@ -166,10 +166,10 @@ export default function Footer() {
           <div>
             <h4 className="ft-heading">Explore</h4>
             <ul className="ft-links">
-              <li><Link to="/destinations">Destinations</Link></li>
-              <li><Link to="/hotels">Hotels</Link></li>
-              <li><Link to="/restaurants">Restaurants</Link></li>
-              <li><Link to="/attractions">Attractions</Link></li>
+              <li><Link to="/search">Destinations</Link></li>
+              <li><Link to="/search">Hotels</Link></li>
+              <li><Link to="/planner">Trip Planner</Link></li>
+              <li><Link to="/group-trip">Group Trips</Link></li>
             </ul>
           </div>
 
@@ -179,7 +179,7 @@ export default function Footer() {
               <li><Link to="/about">About</Link></li>
               <li><Link to="/blog">Blog</Link></li>
               <li><Link to="/careers">Careers</Link></li>
-              <li><Link to="/press">Press</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
             </ul>
           </div>
 
@@ -187,9 +187,9 @@ export default function Footer() {
             <h4 className="ft-heading">Support</h4>
             <ul className="ft-links">
               <li><Link to="/help">Help Center</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/privacy">Privacy</Link></li>
-              <li><Link to="/terms">Terms</Link></li>
+              <li><Link to="/privacy">Privacy Policy</Link></li>
+              <li><Link to="/terms">Terms of Service</Link></li>
+              <li><Link to="/chatbot">Chat Support</Link></li>
             </ul>
           </div>
         </div>

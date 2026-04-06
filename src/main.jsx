@@ -28,6 +28,13 @@ import VoiceSearchPage from './pages/VoiceSearchPage'
 import PredictiveSuggestionsPage from './pages/PredictiveSuggestionsPage'
 import CrowdDensityPage from './pages/CrowdDensityPage'
 import GeoAlertsPage from './pages/GeoAlertsPage'
+import AboutPage from './pages/AboutPage'
+import BlogPage from './pages/BlogPage'
+import CareersPage from './pages/CareersPage'
+import ContactPage from './pages/ContactPage'
+import HelpPage from './pages/HelpPage'
+import PrivacyPage from './pages/PrivacyPage'
+import TermsPage from './pages/TermsPage'
 
 /* ── Shared Components ── */
 import Navbar from './components/Navbar'
@@ -114,6 +121,13 @@ createRoot(document.getElementById('root')).render(
             <Route path="/trending" element={<PublicPage Component={PredictiveSuggestionsPage} />} />
             <Route path="/crowd-density" element={<PublicPage Component={CrowdDensityPage} />} />
             <Route path="/geo-alerts" element={<PublicPage Component={GeoAlertsPage} />} />
+            <Route path="/about" element={<PublicPage Component={AboutPage} />} />
+            <Route path="/blog" element={<PublicPage Component={BlogPage} />} />
+            <Route path="/careers" element={<PublicPage Component={CareersPage} />} />
+            <Route path="/contact" element={<PublicPage Component={ContactPage} />} />
+            <Route path="/help" element={<PublicPage Component={HelpPage} />} />
+            <Route path="/privacy" element={<PublicPage Component={PrivacyPage} />} />
+            <Route path="/terms" element={<PublicPage Component={TermsPage} />} />
           </Routes>
         </AdminProvider>
       </AppProvider>
