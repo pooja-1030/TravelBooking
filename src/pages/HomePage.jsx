@@ -332,6 +332,15 @@ const styles = `
     background: transparent;
     font-family: 'Inter', sans-serif;
     min-width: 0;
+    color-scheme: light;
+  }
+  .hp-search-date::-webkit-calendar-picker-indicator {
+    filter: none;
+    cursor: pointer;
+    opacity: 0.6;
+  }
+  .hp-search-date::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
   }
   .hp-search-select {
     border-right: 1px solid #e5e7eb;
@@ -360,7 +369,7 @@ const styles = `
     transition: background 0.2s ease;
   }
   .hp-search-btn:hover {
-    background: #0d6359;
+    background: #c4401f;
   }
 
   /* ===== GRIDS ===== */
@@ -717,6 +726,10 @@ const styles = `
   [data-theme="dark"] .hp-search-date {
     color: #a0a3ab;
     border-color: #2a2d35;
+    color-scheme: dark;
+  }
+  [data-theme="dark"] .hp-search-date::-webkit-calendar-picker-indicator {
+    filter: invert(0.7);
   }
   [data-theme="dark"] .hp-search-select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0a3ab' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
